@@ -29,7 +29,7 @@ const IntroPage: React.FC = () => {
         <OptionCard
           title="Advertisement Management"
           description="Manage your advertisements."
-          onClick={() => alert("Navigate to Advertisement Management")}
+          onClick={() => navigate("/create-advertisement")} // Navigate to the create advertisement page
         />
       </div>
     </div>
