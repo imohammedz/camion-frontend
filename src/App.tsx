@@ -6,6 +6,7 @@ import IntroPage from "./components/IntroPage";
 import CreateOrderPage from "./components/CreateOrderPage"; // Import the new page
 import CreateFleetPage from "./components/CreateFleetPage";
 import CreateAdvertisementPage from "./components/CreateAdvertisementPage";
+import FleetManagementPage from "./components/FleetManagementPage";
 
 import "./App.css";
 
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/create-order" element={<CreateOrderPage />} />
+        <Route path="/fleet-management" element={<FleetManagementPage />} />
         <Route path="/create-fleet" element={<CreateFleetPage />} />
         <Route
           path="/create-advertisement"

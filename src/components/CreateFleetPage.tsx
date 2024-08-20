@@ -4,8 +4,28 @@ import { useNavigate } from "react-router-dom";
 
 const CreateFleetPage: React.FC = () => {
   const [fleetName, setFleetName] = useState("");
+  const [fleetManager, setFleetManager] = useState("");
+  const [baseLocation, setBaseLocation] = useState("");
   const [truckDetails, setTruckDetails] = useState([
-    { truckId: "", model: "", capacity: "" },
+    {
+      truckId: "",
+      model: "",
+      registrationNumber: "",
+      manufacturer: "",
+      yearOfManufacture: "",
+      capacity: "",
+      dimensions: "",
+      fuelType: "",
+      mileage: "",
+      engineType: "",
+      emissionDetails: "",
+      kycStatus: "pending",
+      status: "",
+      image: "",
+      lastServiceDate: "",
+      nextServiceDueDate: "",
+      currentLocation: "",
+    },
   ]);
 
   const navigate = useNavigate();
@@ -13,7 +33,25 @@ const CreateFleetPage: React.FC = () => {
   const handleAddTruck = () => {
     setTruckDetails([
       ...truckDetails,
-      { truckId: "", model: "", capacity: "" },
+      {
+        truckId: "",
+        model: "",
+        registrationNumber: "",
+        manufacturer: "",
+        yearOfManufacture: "",
+        capacity: "",
+        dimensions: "",
+        fuelType: "",
+        mileage: "",
+        engineType: "",
+        emissionDetails: "",
+        kycStatus: "pending",
+        status: "",
+        image: "",
+        lastServiceDate: "",
+        nextServiceDueDate: "",
+        currentLocation: "",
+      },
     ]);
   };
 
@@ -28,7 +66,13 @@ const CreateFleetPage: React.FC = () => {
     if (
       !fleetName ||
       truckDetails.some(
-        (truck) => !truck.truckId || !truck.model || !truck.capacity
+        (truck) =>
+          !truck.truckId ||
+          !truck.model ||
+          !truck.registrationNumber ||
+          !truck.manufacturer ||
+          !truck.yearOfManufacture ||
+          !truck.capacity
       )
     ) {
       alert("Please fill in all required fields.");
@@ -36,6 +80,12 @@ const CreateFleetPage: React.FC = () => {
     }
     alert(`Fleet "${fleetName}" created with ${truckDetails.length} trucks.`);
     // Further processing logic here
+  };
+
+  const handleKyc = (index: number) => {
+    const updatedTrucks = [...truckDetails];
+    updatedTrucks[index] = { ...updatedTrucks[index], kycStatus: "done" };
+    setTruckDetails(updatedTrucks);
   };
 
   return (
@@ -49,6 +99,26 @@ const CreateFleetPage: React.FC = () => {
             className="form-control"
             value={fleetName}
             onChange={(e) => setFleetName(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group mb-4">
+          <label>Fleet Manager:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={fleetManager}
+            onChange={(e) => setFleetManager(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group mb-4">
+          <label>Fleet Base Location:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={baseLocation}
+            onChange={(e) => setBaseLocation(e.target.value)}
           />
         </div>
 
@@ -78,6 +148,39 @@ const CreateFleetPage: React.FC = () => {
               />
             </div>
             <div className="form-group mb-2">
+              <label>Registration Number:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.registrationNumber}
+                onChange={(e) =>
+                  handleTruckChange(index, "registrationNumber", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Manufacturer:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.manufacturer}
+                onChange={(e) =>
+                  handleTruckChange(index, "manufacturer", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Year of Manufacture:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.yearOfManufacture}
+                onChange={(e) =>
+                  handleTruckChange(index, "yearOfManufacture", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
               <label>Capacity (tons):</label>
               <input
                 type="text"
@@ -85,6 +188,118 @@ const CreateFleetPage: React.FC = () => {
                 value={truck.capacity}
                 onChange={(e) =>
                   handleTruckChange(index, "capacity", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Dimensions:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.dimensions}
+                onChange={(e) =>
+                  handleTruckChange(index, "dimensions", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Fuel Type:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.fuelType}
+                onChange={(e) =>
+                  handleTruckChange(index, "fuelType", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Mileage (km/liter):</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.mileage}
+                onChange={(e) =>
+                  handleTruckChange(index, "mileage", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Engine Type:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.engineType}
+                onChange={(e) =>
+                  handleTruckChange(index, "engineType", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Emission Details:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.emissionDetails}
+                onChange={(e) =>
+                  handleTruckChange(index, "emissionDetails", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>KYC Status:</label>
+              <p>{truck.kycStatus}</p>
+              {truck.kycStatus === "pending" && (
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => handleKyc(index)}
+                >
+                  Complete KYC
+                </button>
+              )}
+            </div>
+            <div className="form-group mb-2">
+              <label>Current Status:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.status}
+                onChange={(e) =>
+                  handleTruckChange(index, "status", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Last Service Date:</label>
+              <input
+                type="date"
+                className="form-control"
+                value={truck.lastServiceDate}
+                onChange={(e) =>
+                  handleTruckChange(index, "lastServiceDate", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Next Service Due Date:</label>
+              <input
+                type="date"
+                className="form-control"
+                value={truck.nextServiceDueDate}
+                onChange={(e) =>
+                  handleTruckChange(index, "nextServiceDueDate", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label>Current Location:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={truck.currentLocation}
+                onChange={(e) =>
+                  handleTruckChange(index, "currentLocation", e.target.value)
                 }
               />
             </div>
