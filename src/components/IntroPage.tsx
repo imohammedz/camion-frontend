@@ -19,7 +19,7 @@ const IntroPage: React.FC = () => {
         <OptionCard
           title="Fleet Management"
           description="Track and manage your fleet."
-          onClick={() => alert("Navigate to Fleet Management")}
+          onClick={() => navigate("/create-fleet")} // Navigate to the create fleet page
         />
         <OptionCard
           title="Service Management"

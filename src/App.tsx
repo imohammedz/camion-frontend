@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import IntroPage from "./components/IntroPage";
 import CreateOrderPage from "./components/CreateOrderPage"; // Import the new page
+import CreateFleetPage from "./components/CreateFleetPage";
 
 import "./App.css";
 
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/create-order" element={<CreateOrderPage />} />
+        <Route path="/create-fleet" element={<CreateFleetPage />} />
       </Routes>
     </Router>
   );
