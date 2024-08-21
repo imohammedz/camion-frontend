@@ -1,25 +1,25 @@
-// src/components/IntroPage.tsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import OptionCard from "./OptionCard";
+import "../styles/IntroPage.css"; // Custom styles for the IntroPage
 
 const IntroPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Welcome to Camion</h1>
-      <p>Select an option to get started:</p>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
+    <div className="intro-container">
+      <h1 className="welcome-title">Welcome to Camion</h1>
+      <p className="intro-text">Select an option to get started:</p>
+      <div className="options-container">
         <OptionCard
           title="Shipment Management"
           description="Manage all shipments efficiently."
-          onClick={() => navigate("/create-order")} // Navigate to the create order page
+          onClick={() => navigate("/create-order")}
         />
         <OptionCard
           title="Fleet Management"
           description="Track and manage your fleet."
-          onClick={() => navigate("/fleet-management")} // Navigate to the Fleet Management page
+          onClick={() => navigate("/fleet-management")}
         />
         <OptionCard
           title="Service Management"
@@ -29,7 +29,7 @@ const IntroPage: React.FC = () => {
         <OptionCard
           title="Advertisement Management"
           description="Manage your advertisements."
-          onClick={() => navigate("/create-advertisement")} // Navigate to the create advertisement page
+          onClick={() => navigate("/create-advertisement")}
         />
       </div>
     </div>

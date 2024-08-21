@@ -1,12 +1,12 @@
-// src/components/Header.tsx
 import React from "react";
+import "../styles/Header.css"; // Custom styles for the header
 
 const Header: React.FC = () => {
   return (
-    <header className="star-animation py-4">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold glow-text text-center">
-        Camion
-      </h1>
+    <header className="header-container">
+      <div className="brand-name">
+        Cam<span className="blue-i">i</span>on
+      </div>
     </header>
   );
 };

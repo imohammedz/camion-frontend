@@ -1,0 +1,23 @@
+/* Header.css */
+
+.header-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    border-bottom: 2px solid #007bff; /* Blue border */
+    backdrop-filter: blur(8px); /* Blur effect */
+    padding: 0.5rem 1rem; /* Slim padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px; /* Adjust height as needed */
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #dc3545; /* Red color for the brand name */
+  }
+  
+  .blue-i {
+    color: #007bff; /* Blue color for the letter "i" */
+  }
+  
