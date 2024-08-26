@@ -9,7 +9,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 interface OptionCardProps {
-  title: string;
+  title:
+    | "Shipment Management"
+    | "Fleet Management"
+    | "Service Management"
+    | "Advertisement Management"; // Union type for specific titles
   description: string;
   onClick: () => void;
 }
@@ -42,8 +46,6 @@ const OptionCard: React.FC<OptionCardProps> = ({
       onClick={onClick}
     >
       <div style={{ marginBottom: "10px", color: "#007bff" }}>
-        {" "}
-        {/* Blue color for icon */}
         <FontAwesomeIcon icon={icons[title]} size="2x" />
       </div>
       <h2 style={{ color: "#dc3545" }}>{title}</h2> {/* Red color for title */}

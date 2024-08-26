@@ -4,9 +4,11 @@ import "../styles/Header.css"; // Custom styles for the header
 const Header: React.FC = () => {
   return (
     <header className="header-container">
-      <div className="brand-name">
-        Cam<span className="blue-i">i</span>on
-      </div>
+      <a href="http://localhost:5173" className="brand-link">
+        <div className="brand-name">
+          Cam<span className="blue-i">i</span>on
+        </div>
+      </a>
     </header>
   );
 };
