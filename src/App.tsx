@@ -1,31 +1,44 @@
 // src/App.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
+import './App.css';
+import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import IntroPage from "./components/IntroPage";
-import CreateOrderPage from "./components/CreateOrderPage"; // Import the new page
+import CreateOrderPage from "./components/CreateOrderPage";
 import CreateFleetPage from "./components/CreateFleetPage";
 import CreateAdvertisementPage from "./components/CreateAdvertisementPage";
 import FleetManagementPage from "./components/FleetManagementPage";
 
-import "./App.css";
-
 const App: React.FC = () => {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<IntroPage />} />
-        <Route path="/create-order" element={<CreateOrderPage />} />
-        <Route path="/fleet-management" element={<FleetManagementPage />} />
-        <Route path="/create-fleet" element={<CreateFleetPage />} />
-        <Route
-          path="/create-advertisement"
-          element={<CreateAdvertisementPage />}
-        />
-        {/* Other routes */}
-      </Routes>
-    </Router>
+    <div>
+      <Router>
+        <Header toggleTheme={toggleTheme} currentTheme={theme} />
+        <Routes>
+          <Route path="/" element={<IntroPage currentTheme={theme} />} />
+          <Route path="/create-order" element={<CreateOrderPage />} />
+          <Route path="/fleet-management" element={<FleetManagementPage />} />
+          <Route path="/create-fleet" element={<CreateFleetPage />} />
+          <Route
+            path="/create-advertisement"
+            element={<CreateAdvertisementPage />}
+          />
+          {/* Other routes */}
+        </Routes>
+      </Router>
+    </div>
   );
 };
 
