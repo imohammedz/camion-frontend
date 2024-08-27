@@ -1,7 +1,7 @@
 // src/App.tsx
 import React, { useEffect, useState } from "react";
 import './App.css';
-import './App.css';
+import './styles/IntroPage.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import IntroPage from "./components/IntroPage";
@@ -27,7 +27,7 @@ const App: React.FC = () => {
       <Router>
         <Header toggleTheme={toggleTheme} currentTheme={theme} />
         <Routes>
-          <Route path="/" element={<IntroPage currentTheme={theme} />} />
+          <Route path="/" element={<IntroPage />} />
           <Route path="/create-order" element={<CreateOrderPage />} />
           <Route path="/fleet-management" element={<FleetManagementPage />} />
           <Route path="/create-fleet" element={<CreateFleetPage />} />
