@@ -1,23 +1,68 @@
-/* Header.css */
-
+/* src/styles/Header.css */
 .header-container {
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
-    border-bottom: 2px solid #007bff; /* Blue border */
-    backdrop-filter: blur(8px); /* Blur effect */
-    padding: 0.5rem 1rem; /* Slim padding */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px; /* Adjust height as needed */
-  }
-  
-  .brand-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #dc3545; /* Red color for the brand name */
-  }
-  
-  .blue-i {
-    color: #007bff; /* Blue color for the letter "i" */
-  }
-  
+  background-color: var(--header-background-color, rgba(255, 255, 255, 0.8));
+  border-bottom: 2px solid var(--header-border-color, #007bff);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  position: relative;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--brand-name-color, #dc3545);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.blue-i {
+  color: var(--blue-i-color, #007bff);
+}
+
+/* Toggle slider styles */
+.theme-toggle-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  background-color: #ccc;
+  border-radius: 34px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}
+
+.theme-toggle-label:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s;
+}
+
+.theme-toggle:checked + .theme-toggle-label {
+  background-color: #007bff;
+}
+
+.theme-toggle:checked + .theme-toggle-label:before {
+  transform: translateX(24px);
+}

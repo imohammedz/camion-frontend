@@ -1,44 +1,48 @@
 /* IntroPage.css */
 
 .intro-container {
-    padding: 20px;
-    text-align: center; /* Center align text and cards */
-    background-color: #f8f9fa; /* Light grey background for contrast */
-    min-height: calc(100vh - 60px); /* Adjust for header height */
-  }
-  
-  .welcome-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #dc3545; /* Red color to match the header */
-    margin-bottom: 1rem;
-  }
-  
-  .intro-text {
-    font-size: 1.125rem;
-    color: #333; /* Dark grey for contrast */
-    margin-bottom: 2rem;
-  }
-  
-  .options-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  }
-  
-  .option-card {
-    width: 200px; /* Adjust width as needed */
-    margin: 0.5rem;
-    background-color: #fff; /* White background for cards */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 1rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .option-card:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
-  }
-  
+  background-image: url('../assets/camion_intro_page_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 60px);
+  padding: 20px;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--brand-name-color, #dc3545);
+  margin-bottom: 1rem;
+}
+
+.intro-text {
+  font-size: 1.125rem;
+  color: var(--text-color, #333);
+  margin-bottom: 2rem;
+}
+
+.options-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.option-card {
+  width: 200px;
+  margin: 0.5rem;
+  background-color: var(--card-background-color, #fff);
+  color: var(--card-text-color, #333);
+  border: 1px solid var(--card-border-color, #ddd);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.option-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
