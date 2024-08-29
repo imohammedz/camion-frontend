@@ -1,4 +1,3 @@
-// src/components/FleetManagementPage.tsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -47,12 +46,15 @@ const FleetManagementPage: React.FC = () => {
     );
   }
 
+  const handleRowClick = (id: string) => {
+    navigate(`/fleets/${id}`);
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Fleet Management</h1>
 
       <div className="flex justify-between mb-4">
-        {/* Circular Back Button on the left */}
         <button
           className="btn btn-secondary flex items-center w-10 h-10 rounded-full justify-center"
           onClick={() => navigate(-1)}
@@ -60,7 +62,6 @@ const FleetManagementPage: React.FC = () => {
           <FontAwesomeIcon icon={faArrowLeft} />
         </button>
 
-        {/* Create New Fleet Button on the right */}
         <button
           className="btn btn-primary flex items-center"
           onClick={() => navigate("/create-fleet")}
@@ -93,7 +94,7 @@ const FleetManagementPage: React.FC = () => {
             </thead>
             <tbody>
               {fleets.map((fleet) => (
-                <tr key={fleet._id}>
+                <tr key={fleet._id} onClick={() => handleRowClick(fleet._id)}>
                   <td className="border px-4 py-2">{fleet._id}</td>
                   <td className="border px-4 py-2">{fleet.fleet_name}</td>
                   <td className="border px-4 py-2">{fleet.fleet_manager}</td>

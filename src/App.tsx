@@ -10,6 +10,8 @@ import CreateFleetPage from "./components/CreateFleetPage";
 import CreateAdvertisementPage from "./components/CreateAdvertisementPage";
 import FleetManagementPage from "./components/FleetManagementPage";
 import AddTrucksPage from "./components/AddTrucksPage";
+import FleetDetailPage from "./components/FleetDetailPage"; // Import the new FleetDetailPage
+import UpdateFleetPage from "./components/UpdateFleetPage";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -30,7 +32,9 @@ const App: React.FC = () => {
         <Route path="/" element={<IntroPage />} />
         <Route path="/create-order" element={<CreateOrderPage />} />
         <Route path="/fleet-management" element={<FleetManagementPage />} />
+        <Route path="/fleets/:fleetId" element={<FleetDetailPage />} />
         <Route path="/create-fleet" element={<CreateFleetPage />} />
+        <Route path="/fleets/:fleetId/edit" element={<UpdateFleetPage />} />
         <Route path="/fleets/:fleetId/add-trucks" element={<AddTrucksPage />} />
         <Route
           path="/create-advertisement"
