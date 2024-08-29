@@ -7,6 +7,7 @@ import CreateOrderPage from "./components/CreateOrderPage"; // Import the new pa
 import CreateFleetPage from "./components/CreateFleetPage";
 import CreateAdvertisementPage from "./components/CreateAdvertisementPage";
 import FleetManagementPage from "./components/FleetManagementPage";
+import AddTrucksPage from "./components/AddTrucksPage";
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <Route path="/create-order" element={<CreateOrderPage />} />
         <Route path="/fleet-management" element={<FleetManagementPage />} />
         <Route path="/create-fleet" element={<CreateFleetPage />} />
+        <Route path="/fleets/:fleetId/add-trucks" element={<AddTrucksPage />} />
         <Route
           path="/create-advertisement"
           element={<CreateAdvertisementPage />}
