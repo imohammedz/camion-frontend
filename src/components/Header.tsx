@@ -1,7 +1,5 @@
 // src/components/Header.tsx
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom"; // Import Link for routing
 import "../styles/Header.css";
 
@@ -18,12 +16,7 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, currentTheme }) => {
       </div>
       <div className="header-actions">
         <Link to="/login" className="header-link">
-          <FontAwesomeIcon icon={faSignInAlt} />
           <span>Login</span>
-        </Link>
-        <Link to="/signup" className="header-link">
-          <FontAwesomeIcon icon={faUser} />
-          <span>Sign Up</span>
         </Link>
       </div>
       <div className="theme-toggle-wrapper">

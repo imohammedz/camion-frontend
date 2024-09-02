@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../styles/LoginPage.css"; // Add your styles here
+import { Link } from "react-router-dom"; // Import Link for routing
 
 const LoginPage: React.FC = () => {
   const [identifier, setIdentifier] = useState("");
@@ -51,6 +52,9 @@ const LoginPage: React.FC = () => {
             required
           />
         </div>
+        <Link to="/signup" className="header-link">
+          <span>Sign Up</span>
+        </Link>
         <button type="submit">Login</button>
       </form>
     </div>
