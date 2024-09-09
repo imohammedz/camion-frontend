@@ -1,6 +1,7 @@
 /* src/styles/LoginPage.css */
 
 body {
+  background-image: url(../assets/bg1.jpg);
   font-family: 'Helvetica Neue', sans-serif;
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
   display: flex;
