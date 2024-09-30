@@ -14,7 +14,13 @@ const FleetManagementPage: React.FC = () => {
   useEffect(() => {
     const fetchFleets = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/fleets");
+        // Retrieve the token from localStorage or wherever it's stored
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:5000/api/fleets", {
+          headers: {
+            Authorization: `${token}`, // Include the token in the request headers
+          },
+        });
         if (response.status === 200) {
           setFleets(response.data);
         } else {
