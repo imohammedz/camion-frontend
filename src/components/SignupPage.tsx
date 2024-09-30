@@ -13,12 +13,17 @@ const SignupPage: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
-        name,
-        email,
-        phoneNumber,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
+          name,
+          email,
+          phoneNumber,
+          password,
+        }
+      );
+      localStorage.setItem("token", response.data.token); // Save JWT token in local storage
+
       // Redirect to login or home page
       window.location.href = "/login";
     } catch (err: any) {
