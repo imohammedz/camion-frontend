@@ -24,6 +24,17 @@
   color: var(--blue-i-color, #007bff);
 }
 
+.header-link {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Use the current text color (to match the brand color) */
+  font-weight: bold; /* Make the text bold to match the brand style */
+}
+
+/* Optional: Add hover effects for better interactivity */
+.header-link:hover {
+  color: var(--header-hover-color, #dc3545); /* Change to desired hover color */
+}
+
 /* Toggle slider styles */
 .theme-toggle-wrapper {
   display: flex;
