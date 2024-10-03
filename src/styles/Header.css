@@ -1,7 +1,6 @@
 /* src/styles/Header.css */
 .header-container {
   background-color: var(--header-background-color, rgba(255, 255, 255, 0.8));
-  border-bottom: 2px solid var(--header-border-color, #007bff);
   backdrop-filter: blur(8px);
   padding: 0.5rem 1rem;
   display: flex;
