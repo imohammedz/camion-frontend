@@ -24,8 +24,15 @@ const UpdateFleetPage: React.FC = () => {
   useEffect(() => {
     const fetchFleet = async () => {
       try {
+        // Retrieve the token from localStorage or wherever it's stored
+        const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:5000/api/fleets/${fleetId}`
+          `http://localhost:5000/api/fleets/${fleetId}`,
+          {
+            headers: {
+              Authorization: `${token}`, // Include the token in the request headers
+            },
+          }
         );
         if (response.status === 200 && response.data) {
           const fleetData = response.data;
@@ -59,6 +66,9 @@ const UpdateFleetPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      // Retrieve the token from localStorage or wherever it's stored
+      const token = localStorage.getItem("token");
+
       const updatedFleetData = {
         fleet_name: fleetName,
         fleet_manager: fleetManager,
@@ -73,7 +83,12 @@ const UpdateFleetPage: React.FC = () => {
 
       await axios.put(
         `http://localhost:5000/api/fleets/${fleetId}`,
-        updatedFleetData
+        updatedFleetData,
+        {
+          headers: {
+            Authorization: `${token}`, // Include the token in the request headers
+          },
+        }
       );
 
       alert("Fleet updated successfully");

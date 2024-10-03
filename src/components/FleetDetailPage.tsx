@@ -19,8 +19,15 @@ const FleetDetailPage: React.FC = () => {
   useEffect(() => {
     const fetchFleet = async () => {
       try {
+        // Retrieve the token from localStorage or wherever it's stored
+        const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:5000/api/fleets/${fleetId}`
+          `http://localhost:5000/api/fleets/${fleetId}`,
+          {
+            headers: {
+              Authorization: `${token}`, // Include the token in the request headers
+            },
+          }
         );
         if (response.status === 200) {
           setFleet(response.data);
@@ -40,7 +47,13 @@ const FleetDetailPage: React.FC = () => {
   // Handle deleting a fleet
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/fleets/${fleetId}`);
+      // Retrieve the token from localStorage or wherever it's stored
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:5000/api/fleets/${fleetId}`, {
+        headers: {
+          Authorization: `${token}`, // Include the token in the request headers
+        },
+      });
       alert("Fleet deleted successfully");
       navigate("/fleets"); // Redirect after deletion
     } catch (error) {
