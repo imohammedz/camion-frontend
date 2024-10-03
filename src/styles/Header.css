@@ -76,3 +76,13 @@
 .theme-toggle:checked + .theme-toggle-label:before {
   transform: translateX(24px);
 }
+
+button {
+  margin-left: 1rem; /* Add spacing between button and other elements */
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Add space between elements */
+}
