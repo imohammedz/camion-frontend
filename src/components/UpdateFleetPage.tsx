@@ -18,7 +18,6 @@ const UpdateFleetPage: React.FC = () => {
   const [totalMileage, setTotalMileage] = useState("");
   const [operationalStatus, setOperationalStatus] =
     useState("fully operational");
-  const [serviceRecords, setServiceRecords] = useState("");
   const [fleetImageUrl, setFleetImageUrl] = useState("");
 
   useEffect(() => {
@@ -48,7 +47,6 @@ const UpdateFleetPage: React.FC = () => {
           setOperationalStatus(
             fleetData.operational_status || "fully operational"
           );
-          setServiceRecords(fleetData.service_records || "");
           setFleetImageUrl(fleetData.fleet_image_url || "");
         } else {
           throw new Error("Fleet not found");
@@ -78,7 +76,6 @@ const UpdateFleetPage: React.FC = () => {
         total_mileage: parseInt(totalMileage),
         fleet_image_url: fleetImageUrl,
         operational_status: operationalStatus,
-        service_records: serviceRecords,
       };
 
       await axios.put(
@@ -138,15 +135,6 @@ const UpdateFleetPage: React.FC = () => {
         />
       </div>
       <div className="form-group mb-3">
-        <label>Average Age of Fleet:</label>
-        <input
-          type="text"
-          className="form-control"
-          value={averageAgeOfFleet}
-          onChange={(e) => setAverageAgeOfFleet(e.target.value)}
-        />
-      </div>
-      <div className="form-group mb-3">
         <label>Total Capacity (tons):</label>
         <input
           type="text"
@@ -175,14 +163,6 @@ const UpdateFleetPage: React.FC = () => {
           <option value="partially operational">Partially Operational</option>
           <option value="under maintenance">Under Maintenance</option>
         </select>
-      </div>
-      <div className="form-group mb-3">
-        <label>Service Records:</label>
-        <textarea
-          className="form-control"
-          value={serviceRecords}
-          onChange={(e) => setServiceRecords(e.target.value)}
-        />
       </div>
       <div className="form-group mb-3">
         <label>Fleet Image URL:</label>

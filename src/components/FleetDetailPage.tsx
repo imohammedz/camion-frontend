@@ -102,9 +102,6 @@ const FleetDetailPage: React.FC = () => {
             <strong>Total Trucks:</strong> {fleet.total_trucks}
           </p>
           <p>
-            <strong>Average Age of Fleet:</strong> {fleet.average_age_of_fleet}
-          </p>
-          <p>
             <strong>Total Capacity (tons):</strong> {fleet.total_capacity}
           </p>
           <p>
@@ -112,9 +109,6 @@ const FleetDetailPage: React.FC = () => {
           </p>
           <p>
             <strong>Operational Status:</strong> {fleet.operational_status}
-          </p>
-          <p>
-            <strong>Service Records:</strong> {fleet.service_records}
           </p>
 
           {/* Edit and Delete buttons */}

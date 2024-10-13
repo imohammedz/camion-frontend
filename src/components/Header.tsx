@@ -1,6 +1,6 @@
 // src/components/Header.tsx
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom"; // Import Link and useLocation
+import { Link, useLocation } from "react-router-dom";
 import "../styles/Header.css";
 import { fetchUserProfile } from "../utils/Api.tsx";
 
@@ -10,47 +10,40 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ toggleTheme, currentTheme }) => {
-  const location = useLocation(); // Get the current location
-  const excludedPaths = ["/login", "/signup"]; // Paths where the Login button should not be shown
+  const location = useLocation();
+  const excludedPaths = ["/login", "/signup"];
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
     const getUserProfile = async () => {
-      const profile = await fetchUserProfile(); // Await the profile fetch
+      const profile = await fetchUserProfile();
       if (profile) {
-        setUserName(profile.name); // Set the user's name
+        setUserName(profile.name);
       }
     };
-
-    getUserProfile(); // Call the function to fetch user profile
+    getUserProfile();
   }, []);
 
   return (
-    <header className="header-container flex justify-between items-center p-4 bg-white shadow">
-      <div className="brand-name">
-        {/* Wrap the brand name in a Link component */}
-        <Link to="/" className="header-link text-2xl font-bold text-red-600">
+    <header className="header flex justify-between items-center p-4 bg-white shadow">
+      <div className="brand-container absolute left-1/2 transform -translate-x-1/2">
+        <Link to="/" className="brand-name">
           Cam<span className="text-blue-600">i</span>on
         </Link>
       </div>
-      <div className="header-actions flex items-center space-x-4">
+      <div className="header-right flex items-center space-x-4 ml-auto">
         {userName ? (
           <span className="text-lg font-medium text-gray-700">
             Welcome, {userName}!
           </span>
         ) : (
           !excludedPaths.includes(location.pathname) && (
-            <Link to="/login" className="header-link">
-              <button
-                type="button"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5"
-              >
-                Login
-              </button>
+            <Link to="/login">
+              <button className="btn-primary">Login</button>
             </Link>
           )
         )}
-        <div className="theme-toggle-wrapper">
+        <div>
           <input
             type="checkbox"
             id="theme-toggle"

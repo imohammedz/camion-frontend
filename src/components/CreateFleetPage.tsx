@@ -6,12 +6,10 @@ const CreateFleetPage: React.FC = () => {
   const [fleetName, setFleetName] = useState("");
   const [fleetManager, setFleetManager] = useState("");
   const [fleetBaseLocation, setFleetBaseLocation] = useState("");
-  const [averageAgeOfFleet, setAverageAgeOfFleet] = useState("");
   const [totalCapacity, setTotalCapacity] = useState("");
   const [totalMileage, setTotalMileage] = useState("");
   const [operationalStatus, setOperationalStatus] =
     useState("fully operational");
-  const [serviceRecords, setServiceRecords] = useState("");
   const [fleetImageUrl, setFleetImageUrl] = useState("");
 
   const navigate = useNavigate();
@@ -23,12 +21,10 @@ const CreateFleetPage: React.FC = () => {
         fleet_name: fleetName,
         fleet_manager: fleetManager,
         fleet_base_location: fleetBaseLocation,
-        average_age_of_fleet: parseFloat(averageAgeOfFleet),
         total_capacity: parseInt(totalCapacity),
         total_mileage: parseInt(totalMileage),
         fleet_image_url: fleetImageUrl,
         operational_status: operationalStatus,
-        service_records: serviceRecords,
       };
 
       const fleetResponse = await axios.post(
@@ -76,15 +72,6 @@ const CreateFleetPage: React.FC = () => {
         />
       </div>
       <div className="form-group mb-3">
-        <label>Average Age of Fleet:</label>
-        <input
-          type="text"
-          className="form-control"
-          value={averageAgeOfFleet}
-          onChange={(e) => setAverageAgeOfFleet(e.target.value)}
-        />
-      </div>
-      <div className="form-group mb-3">
         <label>Total Capacity (tons):</label>
         <input
           type="text"
@@ -113,14 +100,6 @@ const CreateFleetPage: React.FC = () => {
           <option value="partially operational">Partially Operational</option>
           <option value="under maintenance">Under Maintenance</option>
         </select>
-      </div>
-      <div className="form-group mb-3">
-        <label>Service Records:</label>
-        <textarea
-          className="form-control"
-          value={serviceRecords}
-          onChange={(e) => setServiceRecords(e.target.value)}
-        />
       </div>
       <div className="form-group mb-3">
         <label>Fleet Image URL:</label>
