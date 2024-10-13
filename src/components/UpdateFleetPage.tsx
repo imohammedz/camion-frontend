@@ -13,9 +13,7 @@ const UpdateFleetPage: React.FC = () => {
   const [fleetName, setFleetName] = useState("");
   const [fleetManager, setFleetManager] = useState("");
   const [fleetBaseLocation, setFleetBaseLocation] = useState("");
-  const [averageAgeOfFleet, setAverageAgeOfFleet] = useState("");
-  const [totalCapacity, setTotalCapacity] = useState("");
-  const [totalMileage, setTotalMileage] = useState("");
+  const [maxCapacity, setMaxCapacity] = useState("");
   const [operationalStatus, setOperationalStatus] =
     useState("fully operational");
   const [fleetImageUrl, setFleetImageUrl] = useState("");
@@ -39,11 +37,7 @@ const UpdateFleetPage: React.FC = () => {
           setFleetName(fleetData.fleet_name || "");
           setFleetManager(fleetData.fleet_manager || "");
           setFleetBaseLocation(fleetData.fleet_base_location || "");
-          setAverageAgeOfFleet(
-            fleetData.average_age_of_fleet?.toString() || "0"
-          );
-          setTotalCapacity(fleetData.total_capacity?.toString() || "0");
-          setTotalMileage(fleetData.total_mileage?.toString() || "0");
+          setMaxCapacity(fleetData.max_capacity?.toString() || "0");
           setOperationalStatus(
             fleetData.operational_status || "fully operational"
           );
@@ -71,9 +65,7 @@ const UpdateFleetPage: React.FC = () => {
         fleet_name: fleetName,
         fleet_manager: fleetManager,
         fleet_base_location: fleetBaseLocation,
-        average_age_of_fleet: parseFloat(averageAgeOfFleet),
-        total_capacity: parseInt(totalCapacity),
-        total_mileage: parseInt(totalMileage),
+        max_capacity: parseInt(maxCapacity),
         fleet_image_url: fleetImageUrl,
         operational_status: operationalStatus,
       };
@@ -135,21 +127,12 @@ const UpdateFleetPage: React.FC = () => {
         />
       </div>
       <div className="form-group mb-3">
-        <label>Total Capacity (tons):</label>
+        <label>Max Capacity (tons):</label>
         <input
           type="text"
           className="form-control"
-          value={totalCapacity}
-          onChange={(e) => setTotalCapacity(e.target.value)}
-        />
-      </div>
-      <div className="form-group mb-3">
-        <label>Total Mileage (km):</label>
-        <input
-          type="text"
-          className="form-control"
-          value={totalMileage}
-          onChange={(e) => setTotalMileage(e.target.value)}
+          value={maxCapacity}
+          onChange={(e) => setMaxCapacity(e.target.value)}
         />
       </div>
       <div className="form-group mb-3">

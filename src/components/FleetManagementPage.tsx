@@ -91,8 +91,7 @@ const FleetManagementPage: React.FC = () => {
                 <th className="px-4 py-2">Fleet Manager</th>
                 <th className="px-4 py-2">Base Location</th>
                 <th className="px-4 py-2">Total Trucks</th>
-                <th className="px-4 py-2">Total Capacity</th>
-                <th className="px-4 py-2">Total Mileage</th>
+                <th className="px-4 py-2">Max Capacity</th>
                 <th className="px-4 py-2">Operational Status</th>
               </tr>
             </thead>
@@ -106,8 +105,7 @@ const FleetManagementPage: React.FC = () => {
                     {fleet.fleet_base_location}
                   </td>
                   <td className="border px-4 py-2">{fleet.total_trucks}</td>
-                  <td className="border px-4 py-2">{fleet.total_capacity}</td>
-                  <td className="border px-4 py-2">{fleet.total_mileage}</td>
+                  <td className="border px-4 py-2">{fleet.max_capacity}</td>
                   <td className="border px-4 py-2">
                     {fleet.operational_status}
                   </td>

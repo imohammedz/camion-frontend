@@ -6,8 +6,7 @@ const CreateFleetPage: React.FC = () => {
   const [fleetName, setFleetName] = useState("");
   const [fleetManager, setFleetManager] = useState("");
   const [fleetBaseLocation, setFleetBaseLocation] = useState("");
-  const [totalCapacity, setTotalCapacity] = useState("");
-  const [totalMileage, setTotalMileage] = useState("");
+  const [maxCapacity, setMaxCapacity] = useState("");
   const [operationalStatus, setOperationalStatus] =
     useState("fully operational");
   const [fleetImageUrl, setFleetImageUrl] = useState("");
@@ -21,8 +20,7 @@ const CreateFleetPage: React.FC = () => {
         fleet_name: fleetName,
         fleet_manager: fleetManager,
         fleet_base_location: fleetBaseLocation,
-        total_capacity: parseInt(totalCapacity),
-        total_mileage: parseInt(totalMileage),
+        max_capacity: parseInt(maxCapacity),
         fleet_image_url: fleetImageUrl,
         operational_status: operationalStatus,
       };
@@ -72,21 +70,12 @@ const CreateFleetPage: React.FC = () => {
         />
       </div>
       <div className="form-group mb-3">
-        <label>Total Capacity (tons):</label>
+        <label>Max Capacity (tons):</label>
         <input
           type="text"
           className="form-control"
-          value={totalCapacity}
-          onChange={(e) => setTotalCapacity(e.target.value)}
-        />
-      </div>
-      <div className="form-group mb-3">
-        <label>Total Mileage (km):</label>
-        <input
-          type="text"
-          className="form-control"
-          value={totalMileage}
-          onChange={(e) => setTotalMileage(e.target.value)}
+          value={maxCapacity}
+          onChange={(e) => setMaxCapacity(e.target.value)}
         />
       </div>
       <div className="form-group mb-3">

@@ -102,10 +102,7 @@ const FleetDetailPage: React.FC = () => {
             <strong>Total Trucks:</strong> {fleet.total_trucks}
           </p>
           <p>
-            <strong>Total Capacity (tons):</strong> {fleet.total_capacity}
-          </p>
-          <p>
-            <strong>Total Mileage (km):</strong> {fleet.total_mileage}
+            <strong>Max Capacity (tons):</strong> {fleet.max_capacity}
           </p>
           <p>
             <strong>Operational Status:</strong> {fleet.operational_status}
