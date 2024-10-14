@@ -12,7 +12,7 @@ const AddTrucksPage: React.FC = () => {
       year_of_manufacture: "",
       capacity: "",
       dimensions: "",
-      fuel_type: "",
+      fuel_type: "diesel", // Set default fuel type
       mileage: "",
       engine_type: "",
       status: "available",
@@ -36,7 +36,7 @@ const AddTrucksPage: React.FC = () => {
         year_of_manufacture: "",
         capacity: "",
         dimensions: "",
-        fuel_type: "",
+        fuel_type: "diesel", // Set default fuel type
         mileage: "",
         engine_type: "",
         status: "available",
@@ -58,11 +58,26 @@ const AddTrucksPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem("token"); // Retrieve the token once
+
+      if (!token) {
+        console.error("No token found");
+        return;
+      }
+
       for (const truck of truckDetails) {
-        await axios.post("http://localhost:5000/api/trucks", {
-          ...truck,
-          fleet_id: fleetId, // Associate the truck with the fleetId
-        });
+        await axios.post(
+          "http://localhost:5000/api/trucks",
+          {
+            ...truck,
+            fleet_id: fleetId, // Associate the truck with the fleetId
+          },
+          {
+            headers: {
+              Authorization: `${token}`, // Include the token in the request headers
+            },
+          }
+        );
       }
 
       navigate("/fleets"); // Redirect to fleets page after adding trucks

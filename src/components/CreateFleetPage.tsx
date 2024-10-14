@@ -25,9 +25,17 @@ const CreateFleetPage: React.FC = () => {
         operational_status: operationalStatus,
       };
 
+      // Retrieve the token from localStorage or wherever it's stored
+      const token = localStorage.getItem("token");
+
       const fleetResponse = await axios.post(
         "http://localhost:5000/api/fleets",
-        fleetData
+        fleetData,
+        {
+          headers: {
+            Authorization: `${token}`, // Include the token in the request headers
+          },
+        }
       );
 
       const fleetId = fleetResponse.data._id;

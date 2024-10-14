@@ -96,14 +96,18 @@ const TruckDetails: React.FC<TruckDetailsProps> = ({
       </div>
       <div className="form-group mb-2">
         <label>Fuel Type:</label>
-        <input
-          type="text"
-          className="form-control"
+
+        <select
           value={truck.fuel_type}
           onChange={(e) =>
             handleTruckChange(index, "fuel_type", e.target.value)
           }
-        />
+          className="input"
+        >
+          <option value="diesel">Diesel</option>
+          <option value="gasoline">Gasoline</option>
+          <option value="electric">Electric</option>
+        </select>
       </div>
       <div className="form-group mb-2">
         <label>Mileage (km/l):</label>

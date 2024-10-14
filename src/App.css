@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* App.css */
 
 :root {
@@ -29,6 +33,3 @@ body {
 }
 
 /* Other existing styles */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

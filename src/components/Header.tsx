@@ -24,6 +24,12 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, currentTheme }) => {
     getUserProfile();
   }, []);
 
+  // Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove token from localStorage
+    setUserName(null); // Clear user state
+  };
+
   return (
     <header className="header flex justify-between items-center p-4 bg-white shadow">
       <div className="brand-container absolute left-1/2 transform -translate-x-1/2">
@@ -33,9 +39,17 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, currentTheme }) => {
       </div>
       <div className="header-right flex items-center space-x-4 ml-auto">
         {userName ? (
-          <span className="text-lg font-medium text-gray-700">
-            Welcome, {userName}!
-          </span>
+          <>
+            <span className="text-lg font-medium text-gray-700">
+              Welcome, {userName}!
+            </span>
+            <button
+              onClick={handleLogout}
+              className="btn-primary px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+            >
+              Logout
+            </button>
+          </>
         ) : (
           !excludedPaths.includes(location.pathname) && (
             <Link to="/login">
