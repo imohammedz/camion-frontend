@@ -88,6 +88,22 @@ const FleetDetailPage: React.FC = () => {
     navigate(`/fleets/${fleetId}/edit`);
   };
 
+  // Handle deleting a truck
+  const handleDeleteTruck = async (truckId: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:5000/api/trucks/${truckId}`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      // Remove the truck from the state after successful deletion
+      setTrucks(trucks.filter((truck) => truck._id !== truckId));
+    } catch (error) {
+      console.error("Error deleting truck:", error);
+    }
+  };
+
   if (error) {
     return (
       <div className="container mx-auto p-4 text-center">
@@ -150,12 +166,21 @@ const FleetDetailPage: React.FC = () => {
             <div className="mt-6">
               <h3 className="text-xl font-bold mb-4">Truck List</h3>
               {trucks.length > 0 ? (
-                <ul>
+                <ul className="list-group">
                   {trucks.map((truck) => (
-                    <li key={truck.registration_number}>
-                      <strong>Truck Name:</strong> {truck.truck_name} |{" "}
-                      <strong>Registration Number:</strong>{" "}
-                      {truck.registration_number}
+                    <li
+                      key={truck._id}
+                      className="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      <span>
+                        {truck.registration_number} - {truck.truck_name}
+                      </span>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => handleDeleteTruck(truck._id)}
+                      >
+                        &#10006;
+                      </button>
                     </li>
                   ))}
                 </ul>
