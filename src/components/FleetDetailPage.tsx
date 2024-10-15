@@ -7,6 +7,7 @@ import {
   faEdit,
   faTrash,
   faEye,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 const FleetDetailPage: React.FC = () => {
@@ -104,6 +105,11 @@ const FleetDetailPage: React.FC = () => {
     }
   };
 
+  // Handle redirecting to the Add Truck page
+  const handleAddTruck = () => {
+    navigate(`/fleets/${fleetId}/add-trucks`); // Navigate to the add truck page
+  };
+
   if (error) {
     return (
       <div className="container mx-auto p-4 text-center">
@@ -158,6 +164,10 @@ const FleetDetailPage: React.FC = () => {
             <button className="btn btn-info" onClick={handleViewTrucks}>
               <FontAwesomeIcon icon={faEye} className="mr-2" />
               View Trucks
+            </button>
+            <button className="btn btn-success" onClick={handleAddTruck}>
+              <FontAwesomeIcon icon={faPlus} className="mr-2" />
+              Add Truck
             </button>
           </div>
 
