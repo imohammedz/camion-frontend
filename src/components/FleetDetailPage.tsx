@@ -6,6 +6,7 @@ import {
   faArrowLeft,
   faEdit,
   faTrash,
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 
 const FleetDetailPage: React.FC = () => {
@@ -13,19 +14,20 @@ const FleetDetailPage: React.FC = () => {
   const [fleet, setFleet] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [trucks, setTrucks] = useState<any[]>([]);
+  const [viewTrucks, setViewTrucks] = useState(false); // State to toggle the trucks list
   const navigate = useNavigate();
 
   // Fetch fleet details
   useEffect(() => {
     const fetchFleet = async () => {
       try {
-        // Retrieve the token from localStorage or wherever it's stored
         const token = localStorage.getItem("token");
         const response = await axios.get(
           `http://localhost:5000/api/fleets/${fleetId}`,
           {
             headers: {
-              Authorization: `${token}`, // Include the token in the request headers
+              Authorization: `${token}`,
             },
           }
         );
@@ -44,14 +46,33 @@ const FleetDetailPage: React.FC = () => {
     fetchFleet();
   }, [fleetId]);
 
+  // Handle fetching trucks for the fleet
+  const handleViewTrucks = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(
+        `http://localhost:5000/api/fleets/${fleetId}/trucks`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      setTrucks(response.data);
+      setViewTrucks(true); // Show the trucks list
+    } catch (error) {
+      console.error("Error fetching trucks:", error);
+      alert("Failed to fetch trucks.");
+    }
+  };
+
   // Handle deleting a fleet
   const handleDelete = async () => {
     try {
-      // Retrieve the token from localStorage or wherever it's stored
       const token = localStorage.getItem("token");
       await axios.delete(`http://localhost:5000/api/fleets/${fleetId}`, {
         headers: {
-          Authorization: `${token}`, // Include the token in the request headers
+          Authorization: `${token}`,
         },
       });
       alert("Fleet deleted successfully");
@@ -64,7 +85,7 @@ const FleetDetailPage: React.FC = () => {
 
   // Handle editing a fleet
   const handleEdit = () => {
-    navigate(`/fleets/${fleetId}/edit`); // Redirect to the update page
+    navigate(`/fleets/${fleetId}/edit`);
   };
 
   if (error) {
@@ -108,17 +129,41 @@ const FleetDetailPage: React.FC = () => {
             <strong>Operational Status:</strong> {fleet.operational_status}
           </p>
 
-          {/* Edit and Delete buttons */}
+          {/* Buttons for Edit, Delete, and View Trucks */}
           <div className="flex justify-end mt-6">
             <button className="btn btn-warning mr-4" onClick={handleEdit}>
               <FontAwesomeIcon icon={faEdit} className="mr-2" />
               Edit
             </button>
-            <button className="btn btn-danger" onClick={handleDelete}>
+            <button className="btn btn-danger mr-4" onClick={handleDelete}>
               <FontAwesomeIcon icon={faTrash} className="mr-2" />
               Delete
             </button>
+            <button className="btn btn-info" onClick={handleViewTrucks}>
+              <FontAwesomeIcon icon={faEye} className="mr-2" />
+              View Trucks
+            </button>
           </div>
+
+          {/* Display Trucks */}
+          {viewTrucks && (
+            <div className="mt-6">
+              <h3 className="text-xl font-bold mb-4">Truck List</h3>
+              {trucks.length > 0 ? (
+                <ul>
+                  {trucks.map((truck) => (
+                    <li key={truck.registration_number}>
+                      <strong>Truck Name:</strong> {truck.truck_name} |{" "}
+                      <strong>Registration Number:</strong>{" "}
+                      {truck.registration_number}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No trucks available for this fleet.</p>
+              )}
+            </div>
+          )}
         </div>
       ) : (
         <p>No fleet data available.</p>
