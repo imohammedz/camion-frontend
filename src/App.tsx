@@ -15,6 +15,7 @@ import UpdateFleetPage from "./components/UpdateFleetPage";
 import LoginPage from "./components/LoginPage"; // Import the LoginPage component
 import SignupPage from "./components/SignupPage"; // Import the SignupPage component
 import TruckDetailPage from "./components/TruckDetailPage";
+import EditTruckPage from "./components/EditTruckPage";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -42,6 +43,7 @@ const App: React.FC = () => {
         <Route path="/fleets/:fleetId/edit" element={<UpdateFleetPage />} />
         <Route path="/fleets/:fleetId/add-trucks" element={<AddTrucksPage />} />
         <Route path="/trucks/:truckId" element={<TruckDetailPage />} />
+        <Route path="/trucks/:truckId/edit" element={<EditTruckPage />} />
         <Route
           path="/create-advertisement"
           element={<CreateAdvertisementPage />}

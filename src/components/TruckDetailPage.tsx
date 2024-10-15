@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faEdit,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TruckDetailPage: React.FC = () => {
   const { truckId } = useParams<{ truckId: string }>();
@@ -38,6 +42,27 @@ const TruckDetailPage: React.FC = () => {
     };
     fetchTruck();
   }, [truckId]);
+
+  // Handle truck deletion
+  const handleDeleteTruck = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:5000/api/trucks/${truckId}`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      // TODO : please rename the fields in backend [Look at the GET Truck by ID response...]
+      navigate(`/fleets/${truck.fleet_id._id}`); // Redirect to fleet page after deletion
+    } catch (error) {
+      console.error("Error deleting truck:", error);
+    }
+  };
+
+  // Redirect to truck edit page
+  const handleEditTruck = () => {
+    navigate(`/trucks/${truckId}/edit`);
+  };
 
   if (error) {
     return (
@@ -83,6 +108,16 @@ const TruckDetailPage: React.FC = () => {
             <strong>Status:</strong> {truck.status}
           </p>
           {/* Add more truck fields as needed */}
+          <div className="mt-4">
+            <button className="btn btn-warning mr-4" onClick={handleEditTruck}>
+              <FontAwesomeIcon icon={faEdit} className="mr-2" />
+              Edit Truck
+            </button>
+            <button className="btn btn-danger" onClick={handleDeleteTruck}>
+              <FontAwesomeIcon icon={faTrash} className="mr-2" />
+              Delete Truck
+            </button>
+          </div>
         </div>
       ) : (
         <p>No truck data available.</p>
