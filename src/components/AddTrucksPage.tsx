@@ -80,7 +80,7 @@ const AddTrucksPage: React.FC = () => {
         );
       }
 
-      navigate("/fleets"); // Redirect to fleets page after adding trucks
+      navigate(`/fleets/${fleetId}`); // Redirect to fleets page after adding trucks
     } catch (error) {
       console.error("Error adding trucks:", error);
     }
