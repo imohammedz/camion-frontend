@@ -1,0 +1,74 @@
+/* LoginPage.module.css */
+.loginContainer {
+  max-width: 400px;
+  margin: 100px auto 0;
+  padding: 2rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.text {
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.errorMessage {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.loginButton {
+  background-color: #5E5DF0;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  border-radius: 50px;
+  box-sizing: border-box;
+  padding: 7px 17px;
+  font-weight: 600;
+  color: #FFFFFF;
+  outline: 0 solid transparent;
+  line-height: 24px;
+  opacity: 1;
+  touch-action: manipulation;
+}
+
+
+.signupButton {
+  background-color: #5E5DF0;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  border-radius: 50px;
+  box-sizing: border-box;
+  padding: 7px 17px;
+  font-weight: 600;
+  color: #FFFFFF;
+  outline: 0 solid transparent;
+  line-height: 24px;
+  opacity: 1;
+  touch-action: manipulation;
+}
+
+
+
+

@@ -1,7 +1,6 @@
-// src/components/LoginPage.tsx
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/LoginPage.css"; // Add your styles here
+import styles from "./LoginPage.module.css"; // Import styles
 import { Link } from "react-router-dom"; // Import Link for routing
 
 const LoginPage: React.FC = () => {
@@ -28,13 +27,20 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      {error && <div className="error-message">{error}</div>}
+    <div className={styles.loginContainer}>
+      {" "}
+      <div className={styles.text}>
+        <h2>Login</h2>
+      </div>
+      {error && <div className={styles.errorMessage}>{error}</div>}{" "}
+      {/* Apply class from CSS module */}
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className={styles.formGroup}>
+          {" "}
+          {/* Apply class from CSS module */}
           <label htmlFor="identifier">Email or Phone Number</label>
           <input
+            className="style.text-input"
             type="text"
             id="identifier"
             value={identifier}
@@ -42,7 +48,9 @@ const LoginPage: React.FC = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className={styles.formGroup}>
+          {" "}
+          {/* Apply class from CSS module */}
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -52,17 +60,21 @@ const LoginPage: React.FC = () => {
             required
           />
         </div>
-        <Link to="/signup" className="header-link">
-          <span>
+        <div className={styles.buttonContainer}>
+          <button type="submit" className={styles.loginButton}>
+            Login
+          </button>
+          <Link to="/signup" className={styles.headerLink}>
+            {" "}
+            {/* Apply headerLink class from CSS module */}
             <button
               type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              className={styles.signupButton}
             >
               Signup
             </button>
-          </span>
-        </Link>
-        <button type="submit">Login</button>
+          </Link>
+        </div>
       </form>
     </div>
   );

@@ -1,8 +1,7 @@
-// src/components/Header.tsx
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "../styles/Header.css";
-import { fetchUserProfile } from "../utils/Api.tsx";
+import styles from "./Header.module.css"; // Importing CSS Modules
+import { fetchUserProfile } from "../../utils/Api.tsx";
 
 interface HeaderProps {
   toggleTheme: () => void;
@@ -31,21 +30,20 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, currentTheme }) => {
   };
 
   return (
-    <header className="header flex justify-between items-center p-4 bg-white shadow">
-      <div className="brand-container absolute left-1/2 transform -translate-x-1/2">
-        <Link to="/" className="brand-name">
-          Cam<span className="text-blue-600">i</span>on
+    <header className={styles.header}>
+      <div className={styles["brand-container"]}>
+        <Link to="/" className={styles["brand-name"]}>
+          Cam<span className={styles["brand-highlight"]}>i</span>on
         </Link>
       </div>
-      <div className="header-right flex items-center space-x-4 ml-auto">
+      <div className={styles["header-right"]}>
         {userName ? (
           <>
-            <span className="text-lg font-medium text-gray-700">
-              Welcome, {userName}!
-            </span>
+            <span className={styles["welcome-text"]}>Welcome, {userName}!</span>
             <button
               onClick={handleLogout}
-              className="btn-primary px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              className={styles["logout-button"]}
+              aria-label="Logout"
             >
               Logout
             </button>
@@ -53,20 +51,26 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, currentTheme }) => {
         ) : (
           !excludedPaths.includes(location.pathname) && (
             <Link to="/login">
-              <button className="btn-primary">Login</button>
+              <button className={styles["login-button"]} aria-label="Login">
+                Login
+              </button>
             </Link>
           )
         )}
-        <div>
+        <div className={styles["theme-toggle-wrapper"]}>
           <input
             type="checkbox"
             id="theme-toggle"
-            className="theme-toggle"
+            className={styles["theme-toggle"]}
             onChange={toggleTheme}
             checked={currentTheme === "dark"}
+            aria-label="Toggle Theme"
           />
-          <label htmlFor="theme-toggle" className="theme-toggle-label">
-            <span className="theme-toggle-ball"></span>
+          <label
+            htmlFor="theme-toggle"
+            className={styles["theme-toggle-label"]}
+          >
+            <span className={styles["theme-toggle-ball"]}></span>
           </label>
         </div>
       </div>
