@@ -1,9 +1,11 @@
-/* src/styles/Header.css */
+/* Header.module.css */
 .header {
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
-  height: 100px; /* Increased by ~1 cm */
+  height: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light bottom shadow */
 }
+
 
 .brand-container {
   position: absolute;
@@ -14,7 +16,7 @@
 .brand-name {
   font-size: 2rem;
   font-weight: bold;
-  color: #dc3545;
+  color: red;
   text-decoration: none; /* Remove underline */
 }
 
@@ -82,4 +84,18 @@
 
 .theme-toggle:checked + .theme-toggle-label:before {
   transform: translateX(24px);
+}
+
+.login-button {
+  background-color: #5E5DF0;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  border-radius: 40px;
+  box-sizing: border-box;
+  padding: 7px 17px;
+  font-weight: 600;
+  color: #FFFFFF;
+  outline: 0 solid transparent;
+  line-height: 24px;
+  opacity: 1;
+  touch-action: manipulation;
 }

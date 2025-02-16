@@ -1,10 +1,9 @@
 // src/App.tsx
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import "./styles/IntroPage.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import IntroPage from "./components/IntroPage";
+import Header from "./components/Header/Header";
+import IntroPage from "./components/IntroPage/IntroPage";
 import CreateOrderPage from "./components/CreateOrderPage";
 import CreateFleetPage from "./components/CreateFleetPage";
 import CreateAdvertisementPage from "./components/CreateAdvertisementPage";
@@ -12,8 +11,8 @@ import FleetManagementPage from "./components/FleetManagementPage";
 import AddTrucksPage from "./components/AddTrucksPage";
 import FleetDetailPage from "./components/FleetDetailPage"; // Import the new FleetDetailPage
 import UpdateFleetPage from "./components/UpdateFleetPage";
-import LoginPage from "./components/LoginPage"; // Import the LoginPage component
-import SignupPage from "./components/SignupPage"; // Import the SignupPage component
+import LoginPage from "./components/LoginPage/LoginPage"; // Import the LoginPage component
+import SignupPage from "./components/SignupPage/SignupPage"; // Import the SignupPage component
 import TruckDetailPage from "./components/TruckDetailPage";
 import EditTruckPage from "./components/EditTruckPage";
 
