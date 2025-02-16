@@ -6,7 +6,7 @@ import backgroundImage from "../../assets/camion_intro_page_bg.jpg";
 import fleetIcon from "../../assets/fleet.jpg";
 import truckLocationIcon from "../../assets/truck.jpg";
 import serviceIcon from "../../assets/service.jpg";
-import advertiseIcon from "../../assets/advertise.jpg"; 
+import advertiseIcon from "../../assets/advertise.jpg";
 import settingsIcon from "../../assets/settings.jpg";
 import shippingIcon from "../../assets/shipping.jpg";
 
@@ -17,7 +17,12 @@ interface OptionCardProps {
   onClick: () => void;
 }
 
-const OptionCard: React.FC<OptionCardProps> = ({ title, description, icon, onClick }) => (
+const OptionCard: React.FC<OptionCardProps> = ({
+  title,
+  description,
+  icon,
+  onClick,
+}) => (
   <div className={styles["option-card"]} onClick={onClick}>
     <img src={icon} alt={title} className={styles["card-icon"]} />
     <h3>{title}</h3>
@@ -33,43 +38,43 @@ const IntroPage: React.FC = () => {
       icon: shippingIcon,
       title: "Shipment Management",
       description: "Manage all shipments efficiently.",
-      path: "/create-order"
+      path: "/create-order",
     },
     {
       icon: fleetIcon,
       title: "Fleet Management",
       description: "Track and manage your fleet.",
-      path: "/fleet-management"
+      path: "/fleet-management",
     },
     {
       icon: serviceIcon,
       title: "Service Management",
       description: "Handle service requests and records.",
-      path: "/service-management"
+      path: "/service-management",
     },
     {
       icon: advertiseIcon,
       title: "Advertisement Management",
-      description: "Manage your advertisements.",
-      path: "/create-advertisement"
+      description: "Advertisements.",
+      path: "/create-advertisement",
     },
     {
       icon: truckLocationIcon,
       title: "Truck Location Tracking",
       description: "Track your truck from anywhere",
-      path: "/truck-tracking"
+      path: "/truck-tracking",
     },
     {
       icon: settingsIcon,
       title: "Settings",
       description: "Change settings",
-      path: "/settings"
-    }
+      path: "/settings",
+    },
   ];
 
   return (
-    <div 
-      className={styles["intro-container"]} 
+    <div
+      className={styles["intro-container"]}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <h1 className={styles["welcome-title"]}>Welcome to Camion</h1>
@@ -82,9 +87,9 @@ const IntroPage: React.FC = () => {
             icon={option.icon}
             title={option.title}
             description={option.description}
-            onClick={() => 
-              option.title === "Service Management" 
-                ? alert("Navigate to Service Management") 
+            onClick={() =>
+              option.title === "Service Management"
+                ? alert("Navigate to Service Management")
                 : navigate(option.path)
             }
           />
