@@ -136,16 +136,7 @@ const FleetDetailPage: React.FC = () => {
         <div>
           <h2 className="text-2xl font-bold mb-4">{fleet.fleet_name}</h2>
           <p>
-            <strong>Fleet Manager:</strong> {fleet.fleet_manager}
-          </p>
-          <p>
             <strong>Base Location:</strong> {fleet.fleet_base_location}
-          </p>
-          <p>
-            <strong>Total Trucks:</strong> {fleet.total_trucks}
-          </p>
-          <p>
-            <strong>Max Capacity (tons):</strong> {fleet.max_capacity}
           </p>
           <p>
             <strong>Operational Status:</strong> {fleet.operational_status}

@@ -4,12 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const CreateFleetPage: React.FC = () => {
   const [fleetName, setFleetName] = useState("");
-  const [fleetManager, setFleetManager] = useState("");
   const [fleetBaseLocation, setFleetBaseLocation] = useState("");
-  const [maxCapacity, setMaxCapacity] = useState("");
   const [operationalStatus, setOperationalStatus] =
     useState("fully operational");
-  const [fleetImageUrl, setFleetImageUrl] = useState("");
 
   const [successMessage, setSuccessMessage] = useState(""); // State for success message
   const [createdFleetId, setCreatedFleetId] = useState<string | null>(null); // State for storing the created fleet ID
@@ -21,10 +18,7 @@ const CreateFleetPage: React.FC = () => {
     try {
       const fleetData = {
         fleet_name: fleetName,
-        fleet_manager: fleetManager,
         fleet_base_location: fleetBaseLocation,
-        max_capacity: parseInt(maxCapacity),
-        fleet_image_url: fleetImageUrl,
         operational_status: operationalStatus,
       };
 
@@ -47,10 +41,7 @@ const CreateFleetPage: React.FC = () => {
 
       // Clear form after submission
       setFleetName("");
-      setFleetManager("");
       setFleetBaseLocation("");
-      setMaxCapacity("");
-      setFleetImageUrl("");
       setOperationalStatus("fully operational");
     } catch (error) {
       console.error("Error creating fleet:", error);
@@ -83,15 +74,6 @@ const CreateFleetPage: React.FC = () => {
           />
         </div>
         <div className="form-group mb-3">
-          <label>Fleet Manager:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={fleetManager}
-            onChange={(e) => setFleetManager(e.target.value)}
-          />
-        </div>
-        <div className="form-group mb-3">
           <label>Fleet Base Location:</label>
           <input
             type="text"
@@ -100,15 +82,7 @@ const CreateFleetPage: React.FC = () => {
             onChange={(e) => setFleetBaseLocation(e.target.value)}
           />
         </div>
-        <div className="form-group mb-3">
-          <label>Max Capacity (tons):</label>
-          <input
-            type="text"
-            className="form-control"
-            value={maxCapacity}
-            onChange={(e) => setMaxCapacity(e.target.value)}
-          />
-        </div>
+
         <div className="form-group mb-3">
           <label>Operational Status:</label>
           <select
@@ -121,15 +95,7 @@ const CreateFleetPage: React.FC = () => {
             <option value="under maintenance">Under Maintenance</option>
           </select>
         </div>
-        <div className="form-group mb-3">
-          <label>Fleet Image URL:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={fleetImageUrl}
-            onChange={(e) => setFleetImageUrl(e.target.value)}
-          />
-        </div>
+
         <button type="submit" className="btn btn-success mt-4">
           Create Fleet
         </button>
