@@ -88,10 +88,7 @@ const FleetManagementPage: React.FC = () => {
               <tr>
                 <th className="px-4 py-2">Fleet ID</th>
                 <th className="px-4 py-2">Fleet Name</th>
-                <th className="px-4 py-2">Fleet Manager</th>
                 <th className="px-4 py-2">Base Location</th>
-                <th className="px-4 py-2">Total Trucks</th>
-                <th className="px-4 py-2">Max Capacity</th>
                 <th className="px-4 py-2">Operational Status</th>
               </tr>
             </thead>
@@ -100,12 +97,9 @@ const FleetManagementPage: React.FC = () => {
                 <tr key={fleet._id} onClick={() => handleRowClick(fleet._id)}>
                   <td className="border px-4 py-2">{fleet._id}</td>
                   <td className="border px-4 py-2">{fleet.fleet_name}</td>
-                  <td className="border px-4 py-2">{fleet.fleet_manager}</td>
                   <td className="border px-4 py-2">
                     {fleet.fleet_base_location}
                   </td>
-                  <td className="border px-4 py-2">{fleet.total_trucks}</td>
-                  <td className="border px-4 py-2">{fleet.max_capacity}</td>
                   <td className="border px-4 py-2">
                     {fleet.operational_status}
                   </td>
