@@ -6,7 +6,7 @@ import TruckDetails from "./TruckDetails";
 const AddTrucksPage: React.FC = () => {
   const [truckDetails, setTruckDetails] = useState([
     {
-      truck_name: "",
+      truck_model: "",
       registration_number: "",
       manufacturer: "",
       year_of_manufacture: "",
@@ -14,13 +14,7 @@ const AddTrucksPage: React.FC = () => {
       dimensions: "",
       fuel_type: "diesel", // Set default fuel type
       mileage: "",
-      engine_type: "",
       status: "available",
-      image_url: "",
-      last_service_date: "",
-      next_service_due_date: "",
-      current_location: "",
-      gps_installed: false,
     },
   ]);
   const { fleetId } = useParams(); // Get fleetId from the route parameter
@@ -30,7 +24,7 @@ const AddTrucksPage: React.FC = () => {
     setTruckDetails([
       ...truckDetails,
       {
-        truck_name: "",
+        truck_model: "",
         registration_number: "",
         manufacturer: "",
         year_of_manufacture: "",
@@ -38,13 +32,7 @@ const AddTrucksPage: React.FC = () => {
         dimensions: "",
         fuel_type: "diesel", // Set default fuel type
         mileage: "",
-        engine_type: "",
         status: "available",
-        image_url: "",
-        last_service_date: "",
-        next_service_due_date: "",
-        current_location: "",
-        gps_installed: false,
       },
     ]);
   };

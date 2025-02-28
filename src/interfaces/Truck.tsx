@@ -1,7 +1,7 @@
 // src/interfaces/Truck.ts
 
 export interface Truck {
-  truck_name: string;
+  truck_model: string;
   registration_number: string;
   manufacturer: string;
   year_of_manufacture: string;
@@ -9,11 +9,5 @@ export interface Truck {
   dimensions: string;
   fuel_type: string;
   mileage: string;
-  engine_type: string;
   status: string;
-  image_url: string;
-  last_service_date: string;
-  next_service_due_date: string;
-  current_location: string;
-  gps_installed: boolean;
 }
