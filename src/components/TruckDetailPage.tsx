@@ -88,7 +88,7 @@ const TruckDetailPage: React.FC = () => {
         <p>Loading truck data...</p>
       ) : truck ? (
         <div>
-          <h2 className="text-2xl font-bold mb-4">{truck.truck_name}</h2>
+          <h2 className="text-2xl font-bold mb-4">{truck.truck_model}</h2>
           <p>
             <strong>Registration Number:</strong> {truck.registration_number}
           </p>

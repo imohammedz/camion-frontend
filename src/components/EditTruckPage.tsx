@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface Truck {
-  truck_name: string;
+  truck_model: string;
   registration_number: string;
   manufacturer: string;
   year_of_manufacture: number;
@@ -109,7 +109,7 @@ const EditTruckPage: React.FC = () => {
           <input
             type="text"
             name="truck_name"
-            value={truck.truck_name}
+            value={truck.truck_model}
             onChange={handleInputChange}
             className="border border-gray-300 p-2 w-full"
             required
