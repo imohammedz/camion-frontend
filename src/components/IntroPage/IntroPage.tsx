@@ -2,13 +2,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./IntroPage.module.css";
-import backgroundImage from "../../assets/camion_intro_page_bg.jpg";
-import fleetIcon from "../../assets/fleet.jpg";
-import truckLocationIcon from "../../assets/truck.jpg";
-import serviceIcon from "../../assets/service.jpg";
-import advertiseIcon from "../../assets/advertise.jpg";
-import settingsIcon from "../../assets/settings.jpg";
-import shippingIcon from "../../assets/shipping.jpg";
+// import backgroundImage from "../../assets/camion_intro_page_bg.jpg";
+import fleetIcon from "../../../public/assets/fleet.jpg";
+import truckLocationIcon from "../../../public/assets/truck.jpg";
+import serviceIcon from "../../../public/assets/service.jpg";
+import advertiseIcon from "../../../public/assets/advertise.jpg";
+import settingsIcon from "../../../public/assets/settings.jpg";
+import shippingIcon from "../../../public/assets/shipping.jpg";
 
 interface OptionCardProps {
   title: string;
@@ -75,7 +75,11 @@ const IntroPage: React.FC = () => {
   return (
     <div
       className={styles["intro-container"]}
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ 
+        backgroundColor: "transparent",
+        background:"linear-gradient(135deg, #6a11cb, #2575fc)"
+      }}
+      
     >
       <h1 className={styles["welcome-title"]}>Welcome to Camion</h1>
       <p className={styles["intro-text"]}>Select an option to get started</p>

@@ -7,7 +7,7 @@ import IntroPage from "./components/IntroPage/IntroPage";
 import CreateOrderPage from "./components/CreateOrderPage";
 import CreateFleetPage from "./components/CreateFleetPage";
 import CreateAdvertisementPage from "./components/CreateAdvertisementPage";
-import FleetManagementPage from "./components/FleetManagementPage";
+import FleetManagementPage from "./components/FleetManagement/FleetManagementPage";
 import AddTrucksPage from "./components/AddTrucksPage";
 import FleetDetailPage from "./components/FleetDetailPage"; // Import the new FleetDetailPage
 import UpdateFleetPage from "./components/UpdateFleetPage";
@@ -15,6 +15,7 @@ import LoginPage from "./components/LoginPage/LoginPage"; // Import the LoginPag
 import SignupPage from "./components/SignupPage/SignupPage"; // Import the SignupPage component
 import TruckDetailPage from "./components/TruckDetailPage";
 import EditTruckPage from "./components/EditTruckPage";
+import GetStarted from "./components/getStarted/started";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -32,7 +33,8 @@ const App: React.FC = () => {
     <Router>
       <Header toggleTheme={toggleTheme} currentTheme={theme} />
       <Routes>
-        <Route path="/" element={<IntroPage />} />
+        <Route path= "/" element={<GetStarted/>}/>
+        <Route path="/intro" element={<IntroPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/create-order" element={<CreateOrderPage />} />
