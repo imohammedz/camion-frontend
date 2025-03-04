@@ -1,0 +1,88 @@
+/* FleetManagement.module.css */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .button {
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    width: auto;
+    height: 2.5rem;
+    padding: 0.5rem 2%; 
+    border-radius: 19px;
+    font-weight: 600;
+  }
+  
+  .backButton {
+    background-color: rgb(62, 62, 200);
+    color: white;
+  }
+  
+  .backButton:hover {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02); 
+  }
+  
+  
+  .arrowButton {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .arrowButton:hover {
+    opacity: 1;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+    position: relative;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th {
+    background-color: #e5e7eb;
+    padding: 0.5rem 1rem;
+  }
+  
+  .table td {
+    border: 1px solid #d1d5db;
+    padding: 0.5rem 1rem;
+  }
+  
+  .noDataContainer {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .createButton {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .createButton:hover {
+    background-color: #1d4ed8;
+  }
+  
