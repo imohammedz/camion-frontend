@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  TableRow,
-  TableCell,
-  Chip,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
+import { TableRow, TableCell, Chip, IconButton, Tooltip } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
 
 interface Fleet {
-  _id: string;
+  id: string;
   fleet_name: string;
   fleet_base_location: string;
   operational_status: string;
@@ -58,7 +52,7 @@ const FleetRow: React.FC<FleetRowProps> = ({ fleet }) => {
         {isHovered && (
           <Tooltip title="View Details">
             <IconButton
-              onClick={() => navigate(`/fleets/${fleet._id}`)}
+              onClick={() => navigate(`/fleets/${fleet.id}`)}
               size="small"
             >
               <ArrowForward />

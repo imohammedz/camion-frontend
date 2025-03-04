@@ -39,6 +39,11 @@ const CreateFleetPage: React.FC = () => {
       setCreatedFleetId(fleetId); // Store the created fleet ID
       setSuccessMessage(`${fleetName} fleet created successfully!`);
 
+      // Check if a new token is provided (assuming backend returns it after role update)
+      if (fleetResponse.data.token) {
+        localStorage.setItem("token", fleetResponse.data.token);
+      }
+
       // Clear form after submission
       setFleetName("");
       setFleetBaseLocation("");

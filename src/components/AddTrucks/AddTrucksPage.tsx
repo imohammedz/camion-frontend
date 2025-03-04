@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import TruckDetails from "./TruckDetails";
+import TruckDetails from "../TruckDetails";
+import styles from "./AddTrucks.module.css";
 
 const AddTrucksPage: React.FC = () => {
   const [truckDetails, setTruckDetails] = useState([
@@ -12,12 +13,12 @@ const AddTrucksPage: React.FC = () => {
       year_of_manufacture: "",
       capacity: "",
       dimensions: "",
-      fuel_type: "diesel", // Set default fuel type
+      fuel_type: "diesel", // Default fuel type
       mileage: "",
       status: "available",
     },
   ]);
-  const { fleetId } = useParams(); // Get fleetId from the route parameter
+  const { fleetId } = useParams(); // Get fleetId from route parameter
   const navigate = useNavigate();
 
   const handleAddTruck = () => {
@@ -30,7 +31,7 @@ const AddTrucksPage: React.FC = () => {
         year_of_manufacture: "",
         capacity: "",
         dimensions: "",
-        fuel_type: "diesel", // Set default fuel type
+        fuel_type: "diesel", // Default fuel type
         mileage: "",
         status: "available",
       },
@@ -46,7 +47,7 @@ const AddTrucksPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token"); // Retrieve the token once
+      const token = localStorage.getItem("token");
 
       if (!token) {
         console.error("No token found");
@@ -58,25 +59,25 @@ const AddTrucksPage: React.FC = () => {
           "http://localhost:5000/api/trucks",
           {
             ...truck,
-            fleet_id: fleetId, // Associate the truck with the fleetId
+            fleet_id: fleetId, // Associate the truck with fleetId
           },
           {
             headers: {
-              Authorization: `${token}`, // Include the token in the request headers
+              Authorization: `${token}`, // Include token in headers
             },
           }
         );
       }
 
-      navigate(`/fleets/${fleetId}`); // Redirect to fleets page after adding trucks
+      navigate(`/fleets/${fleetId}`); // Redirect to fleet detail page after adding trucks
     } catch (error) {
       console.error("Error adding trucks:", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="container mt-4">
-      <h2>Add Trucks to Fleet</h2>
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <h2 className={styles.title}>Add Trucks to Fleet</h2>
       {truckDetails.map((truck, index) => (
         <TruckDetails
           key={index}
@@ -88,12 +89,12 @@ const AddTrucksPage: React.FC = () => {
 
       <button
         type="button"
-        className="btn btn-primary"
+        className={styles.addButton}
         onClick={handleAddTruck}
       >
         Add Another Truck
       </button>
-      <button type="submit" className="btn btn-success mt-4">
+      <button type="submit" className={styles.submitButton}>
         Add Trucks
       </button>
     </form>

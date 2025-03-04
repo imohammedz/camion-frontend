@@ -25,13 +25,13 @@ const TruckDetails: React.FC<TruckDetailsProps> = ({
   return (
     <div className="mb-4">
       <div className="form-group mb-2">
-        <label>Truck Name:</label>
+        <label>Truck Model:</label>
         <input
           type="text"
           className="form-control"
           value={truck.truck_model}
           onChange={(e) =>
-            handleTruckChange(index, "truck_name", e.target.value)
+            handleTruckChange(index, "truck_model", e.target.value)
           }
         />
       </div>
