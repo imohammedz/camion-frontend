@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { CircularProgress, Typography, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
@@ -9,6 +9,8 @@ import {
   faEye,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import styles from "./FleetDetail.module.css";
 
 const FleetDetailPage: React.FC = () => {
   const { fleetId } = useParams<{ fleetId: string }>();
@@ -16,11 +18,15 @@ const FleetDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [trucks, setTrucks] = useState<any[]>([]);
-  const [viewTrucks, setViewTrucks] = useState(false); // State to toggle the trucks list
+  const [viewTrucks, setViewTrucks] = useState(false);
   const navigate = useNavigate();
 
-  // Fetch fleet details
   useEffect(() => {
+    if (!fleetId) {
+      console.error("Fleet ID is undefined!");
+      return;
+    }
+
     const fetchFleet = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -47,7 +53,6 @@ const FleetDetailPage: React.FC = () => {
     fetchFleet();
   }, [fleetId]);
 
-  // Handle fetching trucks for the fleet
   const handleViewTrucks = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -60,14 +65,13 @@ const FleetDetailPage: React.FC = () => {
         }
       );
       setTrucks(response.data);
-      setViewTrucks(true); // Show the trucks list
+      setViewTrucks(true);
     } catch (error) {
       console.error("Error fetching trucks:", error);
       alert("Failed to fetch trucks.");
     }
   };
 
-  // Handle deleting a fleet
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -77,45 +81,27 @@ const FleetDetailPage: React.FC = () => {
         },
       });
       alert("Fleet deleted successfully");
-      navigate("/fleets"); // Redirect after deletion
+      navigate("/fleets");
     } catch (error) {
       console.error("Error deleting fleet:", error);
       alert("Failed to delete the fleet.");
     }
   };
 
-  // Handle editing a fleet
   const handleEdit = () => {
     navigate(`/fleets/${fleetId}/edit`);
   };
 
-  // Handle deleting a truck
-  const handleDeleteTruck = async (truckId: string) => {
-    try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/trucks/${truckId}`, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
-      // Remove the truck from the state after successful deletion
-      setTrucks(trucks.filter((truck) => truck._id !== truckId));
-    } catch (error) {
-      console.error("Error deleting truck:", error);
-    }
-  };
-
-  // Handle redirecting to the Add Truck page
   const handleAddTruck = () => {
-    navigate(`/fleets/${fleetId}/add-trucks`); // Navigate to the add truck page
+    navigate(`/fleets/${fleetId}/add-trucks`);
   };
 
   if (error) {
     return (
-      <div className="container mx-auto p-4 text-center">
-        <h1 className="text-3xl font-bold text-red-600 mb-4">Error!</h1>
-        <p className="text-lg text-gray-700">Fleet not found.</p>
-        <button className="btn btn-secondary mt-4" onClick={() => navigate(-1)}>
+      <div className={styles.errorContainer}>
+        <h1 className={styles.errorTitle}>Error!</h1>
+        <p className={styles.errorMessage}>Fleet not found.</p>
+        <button className={styles.backButton} onClick={() => navigate(-1)}>
           <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
           Go Back
         </button>
@@ -124,65 +110,53 @@ const FleetDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <button className="btn btn-secondary mb-4" onClick={() => navigate(-1)}>
+    <div className={styles.container}>
+      <button className={styles.backButton} onClick={() => navigate(-1)}>
         <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
         Back
       </button>
 
       {loading ? (
-        <p>Loading fleet data...</p>
+        <CircularProgress sx={{ display: "block", mx: "auto", my: 4 }} />
       ) : fleet ? (
         <div>
-          <h2 className="text-2xl font-bold mb-4">{fleet.fleet_name}</h2>
-          <p>
+          <h2 className={styles.title}>{fleet.fleet_name}</h2>
+          <p className={styles.info}>
             <strong>Base Location:</strong> {fleet.fleet_base_location}
           </p>
-          <p>
+          <p className={styles.info}>
             <strong>Operational Status:</strong> {fleet.operational_status}
           </p>
 
-          {/* Buttons for Edit, Delete, and View Trucks */}
-          <div className="flex justify-end mt-6">
-            <button className="btn btn-warning mr-4" onClick={handleEdit}>
+          <div className={styles.actionButtons}>
+            <button className={styles.editButton} onClick={handleEdit}>
               <FontAwesomeIcon icon={faEdit} className="mr-2" />
               Edit
             </button>
-            <button className="btn btn-danger mr-4" onClick={handleDelete}>
+            <button className={styles.deleteButton} onClick={handleDelete}>
               <FontAwesomeIcon icon={faTrash} className="mr-2" />
               Delete
             </button>
-            <button className="btn btn-info" onClick={handleViewTrucks}>
+            <button className={styles.viewButton} onClick={handleViewTrucks}>
               <FontAwesomeIcon icon={faEye} className="mr-2" />
               View Trucks
             </button>
-            <button className="btn btn-success" onClick={handleAddTruck}>
+            <button className={styles.addButton} onClick={handleAddTruck}>
               <FontAwesomeIcon icon={faPlus} className="mr-2" />
               Add Truck
             </button>
           </div>
 
-          {/* Display Trucks */}
           {viewTrucks && (
-            <div className="mt-6">
-              <h3 className="text-xl font-bold mb-4">Truck List</h3>
+            <div className={styles.truckList}>
+              <h3 className={styles.truckListTitle}>Truck List</h3>
               {trucks.length > 0 ? (
-                <ul className="list-group">
+                <ul className={styles.truckListItems}>
                   {trucks.map((truck) => (
-                    <li
-                      key={truck._id}
-                      className="list-group-item d-flex justify-content-between align-items-center"
-                      onClick={() => navigate(`/trucks/${truck._id}`)} // Navigate to truck detail page
-                    >
+                    <li key={truck._id} className={styles.truckItem}>
                       <span>
                         {truck.registration_number} - {truck.truck_name}
                       </span>
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={() => handleDeleteTruck(truck._id)}
-                      >
-                        &#10006;
-                      </button>
                     </li>
                   ))}
                 </ul>

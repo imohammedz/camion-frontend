@@ -17,7 +17,7 @@ import styles from "./FleetManagement.module.css";
 import axios from "axios";
 
 interface Fleet {
-  _id: string;
+  id: string;
   fleet_name: string;
   fleet_base_location: string;
   operational_status: string;
@@ -53,7 +53,7 @@ const FleetManagementPage: React.FC = () => {
 
     fetchFleets();
   }, []);
-  
+
   // If there's an error, show a generic error message
   if (error) {
     return (
@@ -117,7 +117,7 @@ const FleetManagementPage: React.FC = () => {
             </TableHead>
             <TableBody>
               {fleets.map((fleet) => (
-                <FleetRow key={fleet._id} fleet={fleet} />
+                <FleetRow key={fleet.id} fleet={fleet} />
               ))}
             </TableBody>
           </Table>
