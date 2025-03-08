@@ -12,16 +12,10 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import FleetRow from "./../ui/fleet";
+import FleetRow from "../ui/tableComponent";
 import styles from "./FleetManagement.module.css";
 import axios from "axios";
-
-interface Fleet {
-  id: string;
-  fleet_name: string;
-  fleet_base_location: string;
-  operational_status: string;
-}
+import {Fleet}  from "../../interfaces/Fleet";
 
 const FleetManagementPage: React.FC = () => {
   const navigate = useNavigate();
