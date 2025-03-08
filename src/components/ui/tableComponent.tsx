@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TableRow, TableCell, Chip, IconButton, Tooltip } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
-
-interface Fleet {
-  id: string;
-  fleet_name: string;
-  fleet_base_location: string;
-  operational_status: string;
-}
+import { Fleet } from "../../interfaces/Fleet";
 
 interface FleetRowProps {
   fleet: Fleet;
@@ -45,7 +39,7 @@ const FleetRow: React.FC<FleetRowProps> = ({ fleet }) => {
           label={fleet.operational_status}
           color={getStatusColor(fleet.operational_status)}
           variant="outlined"
-          sx={{ fontWeight: "bold" }}
+          sx={{ fontWeight: "bold" , backgroundColor: "lightGreen"}}
         />
       </TableCell>
       <TableCell align="right">

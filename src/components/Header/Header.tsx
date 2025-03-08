@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import styles from "./Header.module.css"; // Importing CSS Modules
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  IconButton,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import ThemeToggleButton from "../ui/themeToggleButton.tsx";
 import { fetchUserProfile } from "../../utils/Api.tsx";
+import { DarkMode, LightMode } from "@mui/icons-material";
 
 interface HeaderProps {
   toggleTheme: () => void;
-  currentTheme: string;
+  darkMode: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleTheme, currentTheme }) => {
+const Header: React.FC<HeaderProps> = ({ toggleTheme, darkMode }) => {
+  const theme = useTheme();
   const location = useLocation();
   const excludedPaths = ["/login", "/signup"];
   const [userName, setUserName] = useState<string | null>(null);
@@ -23,58 +34,72 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, currentTheme }) => {
     getUserProfile();
   }, []);
 
-  // Logout handler
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove token from localStorage
-    setUserName(null); // Clear user state
+    localStorage.removeItem("token");
+    setUserName(null);
   };
 
   return (
-    <header className={styles.header}>
-      <div className={styles["brand-container"]}>
-        <Link to="/" className={styles["brand-name"]}>
-          Cam<span className={styles["brand-highlight"]}>i</span>on
-        </Link>
-      </div>
-      <div className={styles["header-right"]}>
-        {userName ? (
-          <>
-            <span className={styles["welcome-text"]}>Welcome, {userName}!</span>
-            <button
-              onClick={handleLogout}
-              className={styles["logout-button"]}
-              aria-label="Logout"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          !excludedPaths.includes(location.pathname) && (
-            <Link to="/login">
-              <button className={styles["login-button"]} aria-label="Login">
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.primary,
+        boxShadow: 1,
+      }}
+    >
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        {/* Empty box to balance the layout */}
+        <Box sx={{ width: "33%" }} />
+
+        {/* Centered title */}
+        <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", color: "red" }}>
+            Cam<span style={{ color: theme.palette.text.primary }}>i</span>on
+          </Typography>
+        </Box>
+
+        {/* Right side: User info, logout, and theme toggle */}
+        <Box
+          sx={{
+            width: "33%",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+        >
+          {userName ? (
+            <>
+              <Typography variant="body1" sx={{ marginRight: 2 }}>
+                Welcome, {userName}!
+              </Typography>
+              <Button
+                variant="outlined"
+                onClick={handleLogout}
+                sx={{ color: theme.palette.text.primary }}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            !excludedPaths.includes(location.pathname) && (
+              <Button
+                component={Link}
+                to="/login"
+                sx={{ color: theme.palette.text.primary }}
+              >
                 Login
-              </button>
-            </Link>
-          )
-        )}
-        <div className={styles["theme-toggle-wrapper"]}>
-          <input
-            type="checkbox"
-            id="theme-toggle"
-            className={styles["theme-toggle"]}
-            onChange={toggleTheme}
-            checked={currentTheme === "dark"}
-            aria-label="Toggle Theme"
-          />
-          <label
-            htmlFor="theme-toggle"
-            className={styles["theme-toggle-label"]}
-          >
-            <span className={styles["theme-toggle-ball"]}></span>
-          </label>
-        </div>
-      </div>
-    </header>
+              </Button>
+            )
+          )}
+          <Box ml={2}>
+            <IconButton onClick={toggleTheme} color="inherit">
+              {darkMode ? <LightMode /> : <DarkMode />}
+            </IconButton>
+          </Box>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 

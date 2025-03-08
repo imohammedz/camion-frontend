@@ -1,57 +1,70 @@
-// src/App.tsx
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React, { useState, useMemo } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import Header from "./components/Header/Header";
+import GetStarted from "./components/getStarted/started";
 import IntroPage from "./components/IntroPage/IntroPage";
 import CreateOrderPage from "./components/CreateOrderPage";
 import CreateFleetPage from "./components/CreateFleetPage";
 import CreateAdvertisementPage from "./components/CreateAdvertisementPage";
 import FleetManagementPage from "./components/FleetManagement/FleetManagementPage";
 import AddTrucksPage from "./components/AddTrucks/AddTrucksPage";
-import FleetDetailPage from "./components/FleetDetail/FleetDetailPage"; // Import the new FleetDetailPage
+import FleetDetailPage from "./components/FleetDetail/FleetDetailPage";
 import UpdateFleetPage from "./components/UpdateFleetPage";
-import LoginPage from "./components/LoginPage/LoginPage"; // Import the LoginPage component
-import SignupPage from "./components/SignupPage/SignupPage"; // Import the SignupPage component
+import LoginPage from "./components/LoginPage/LoginPage";
+import SignupPage from "./components/SignupPage/SignupPage";
 import TruckDetailPage from "./components/TruckDetailPage";
 import EditTruckPage from "./components/EditTruckPage";
-import GetStarted from "./components/getStarted/started";
 
 const App: React.FC = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [darkMode, setDarkMode] = useState<boolean>(
+    localStorage.getItem("theme") === "dark"
+  );
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  // Create a theme based on the state
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: darkMode ? "dark" : "light",
+        },
+      }),
+    [darkMode]
+  );
 
+  // Toggle function for the theme
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setDarkMode((prev) => {
+      const newTheme = !prev;
+      localStorage.setItem("theme", newTheme ? "dark" : "light");
+      return newTheme;
+    });
   };
 
   return (
-    <Router>
-      <Header toggleTheme={toggleTheme} currentTheme={theme} />
-      <Routes>
-        <Route path="/" element={<GetStarted />} />
-        <Route path="/intro" element={<IntroPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/create-order" element={<CreateOrderPage />} />
-        <Route path="/fleet-management" element={<FleetManagementPage />} />
-        <Route path="/fleets/:fleetId" element={<FleetDetailPage />} />
-        <Route path="/create-fleet" element={<CreateFleetPage />} />
-        <Route path="/fleets/:fleetId/edit" element={<UpdateFleetPage />} />
-        <Route path="/fleets/:fleetId/add-trucks" element={<AddTrucksPage />} />
-        <Route path="/trucks/:truckId" element={<TruckDetailPage />} />
-        <Route path="/trucks/:truckId/edit" element={<EditTruckPage />} />
-        <Route
-          path="/create-advertisement"
-          element={<CreateAdvertisementPage />}
-        />
-        {/* Other routes */}
-      </Routes>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        {/* Header with Theme Toggle inside */}
+        <Header toggleTheme={toggleTheme} darkMode={darkMode} />
+        
+        <Routes>
+          <Route path="/" element={<GetStarted />} />
+          <Route path="/intro" element={<IntroPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/create-order" element={<CreateOrderPage />} />
+          <Route path="/fleet-management" element={<FleetManagementPage />} />
+          <Route path="/fleets/:fleetId" element={<FleetDetailPage />} />
+          <Route path="/create-fleet" element={<CreateFleetPage />} />
+          <Route path="/fleets/:fleetId/edit" element={<UpdateFleetPage />} />
+          <Route path="/fleets/:fleetId/add-trucks" element={<AddTrucksPage />} />
+          <Route path="/trucks/:truckId" element={<TruckDetailPage />} />
+          <Route path="/trucks/:truckId/edit" element={<EditTruckPage />} />
+          <Route path="/create-advertisement" element={<CreateAdvertisementPage />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 };
 
