@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FleetOperationalStatus } from "./../../public/enums/FleetOperationalStatus";
 
 const CreateFleetPage: React.FC = () => {
   const [fleetName, setFleetName] = useState("");
   const [fleetBaseLocation, setFleetBaseLocation] = useState("");
-  const [operationalStatus, setOperationalStatus] =
-    useState("fully operational");
+  const [operationalStatus, setOperationalStatus] = useState<FleetOperationalStatus>(
+    FleetOperationalStatus.FULLY_OPERATIONAL
+  );
 
-  const [successMessage, setSuccessMessage] = useState(""); // State for success message
-  const [createdFleetId, setCreatedFleetId] = useState<string | null>(null); // State for storing the created fleet ID
+  const [successMessage, setSuccessMessage] = useState("");
+  const [createdFleetId, setCreatedFleetId] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -19,10 +21,9 @@ const CreateFleetPage: React.FC = () => {
       const fleetData = {
         fleet_name: fleetName,
         fleet_base_location: fleetBaseLocation,
-        operational_status: operationalStatus,
+        operational_status: operationalStatus, // Using enum directly
       };
 
-      // Retrieve the token from localStorage or wherever it's stored
       const token = localStorage.getItem("token");
 
       const fleetResponse = await axios.post(
@@ -30,24 +31,23 @@ const CreateFleetPage: React.FC = () => {
         fleetData,
         {
           headers: {
-            Authorization: `${token}`, // Include the token in the request headers
+            Authorization: `${token}`,
           },
         }
       );
 
       const fleetId = fleetResponse.data._id;
-      setCreatedFleetId(fleetId); // Store the created fleet ID
+      setCreatedFleetId(fleetId);
       setSuccessMessage(`${fleetName} fleet created successfully!`);
 
-      // Check if a new token is provided (assuming backend returns it after role update)
       if (fleetResponse.data.token) {
         localStorage.setItem("token", fleetResponse.data.token);
       }
 
-      // Clear form after submission
+      // Reset form
       setFleetName("");
       setFleetBaseLocation("");
-      setOperationalStatus("fully operational");
+      setOperationalStatus(FleetOperationalStatus.FULLY_OPERATIONAL);
     } catch (error) {
       console.error("Error creating fleet:", error);
     }
@@ -93,11 +93,11 @@ const CreateFleetPage: React.FC = () => {
           <select
             className="form-control"
             value={operationalStatus}
-            onChange={(e) => setOperationalStatus(e.target.value)}
+            onChange={(e) => setOperationalStatus(e.target.value as FleetOperationalStatus)}
           >
-            <option value="fully operational">Fully Operational</option>
-            <option value="partially operational">Partially Operational</option>
-            <option value="under maintenance">Under Maintenance</option>
+            <option value={FleetOperationalStatus.FULLY_OPERATIONAL}>Fully Operational</option>
+            <option value={FleetOperationalStatus.PARTIALLY_OPERATIONAL}>Partially Operational</option>
+            <option value={FleetOperationalStatus.UNDER_MAINTENANCE}>Under Maintenance</option>
           </select>
         </div>
 
@@ -106,14 +106,12 @@ const CreateFleetPage: React.FC = () => {
         </button>
       </form>
 
-      {/* Success message box */}
       {successMessage && (
         <div className="alert alert-success mt-4" role="alert">
           {successMessage}
         </div>
       )}
 
-      {/* Buttons for Add Trucks and Edit Fleet */}
       {createdFleetId && (
         <div className="mt-4">
           <button className="btn btn-primary me-2" onClick={handleAddTrucks}>
