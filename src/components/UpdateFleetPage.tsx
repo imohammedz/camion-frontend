@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { FleetOperationalStatus } from "../../public/enums/FleetOperationalStatus";
+import { MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 
 const UpdateFleetPage: React.FC = () => {
   const { fleetId } = useParams<{ fleetId: string }>();
@@ -12,18 +14,17 @@ const UpdateFleetPage: React.FC = () => {
 
   const [fleetName, setFleetName] = useState("");
   const [fleetBaseLocation, setFleetBaseLocation] = useState("");
-  const [operationalStatus, setOperationalStatus] =
-    useState("fully operational");
+  const [operationalStatus, setOperationalStatus] = useState(FleetOperationalStatus.FULLY_OPERATIONAL);
+
   useEffect(() => {
     const fetchFleet = async () => {
       try {
-        // Retrieve the token from localStorage or wherever it's stored
         const token = localStorage.getItem("token");
         const response = await axios.get(
           `http://localhost:5000/api/fleets/${fleetId}`,
           {
             headers: {
-              Authorization: `${token}`, // Include the token in the request headers
+              Authorization: `${token}`,
             },
           }
         );
@@ -32,9 +33,7 @@ const UpdateFleetPage: React.FC = () => {
           setFleet(fleetData);
           setFleetName(fleetData.fleet_name || "");
           setFleetBaseLocation(fleetData.fleet_base_location || "");
-          setOperationalStatus(
-            fleetData.operational_status || "fully operational"
-          );
+          setOperationalStatus(fleetData.operational_status as FleetOperationalStatus || FleetOperationalStatus.FULLY_OPERATIONAL);
         } else {
           throw new Error("Fleet not found");
         }
@@ -51,7 +50,6 @@ const UpdateFleetPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Retrieve the token from localStorage or wherever it's stored
       const token = localStorage.getItem("token");
 
       const updatedFleetData = {
@@ -65,7 +63,7 @@ const UpdateFleetPage: React.FC = () => {
         updatedFleetData,
         {
           headers: {
-            Authorization: `${token}`, // Include the token in the request headers
+            Authorization: `${token}`,
           },
         }
       );
@@ -108,16 +106,19 @@ const UpdateFleetPage: React.FC = () => {
         />
       </div>
       <div className="form-group mb-3">
-        <label>Operational Status:</label>
-        <select
-          className="form-control"
-          value={operationalStatus}
-          onChange={(e) => setOperationalStatus(e.target.value)}
-        >
-          <option value="fully operational">Fully Operational</option>
-          <option value="partially operational">Partially Operational</option>
-          <option value="under maintenance">Under Maintenance</option>
-        </select>
+        <FormControl fullWidth variant="outlined">
+          <InputLabel id="operational-status-label">Operational Status</InputLabel>
+          <Select
+            labelId="operational-status-label"
+            value={operationalStatus}
+            onChange={(e) => setOperationalStatus(e.target.value as FleetOperationalStatus)}
+            label="Operational Status"
+          >
+            <MenuItem value={FleetOperationalStatus.FULLY_OPERATIONAL}>Fully Operational</MenuItem>
+            <MenuItem value={FleetOperationalStatus.PARTIALLY_OPERATIONAL}>Partially Operational</MenuItem>
+            <MenuItem value={FleetOperationalStatus.UNDER_MAINTENANCE}>Under Maintenance</MenuItem>
+          </Select>
+        </FormControl>
       </div>
       <button type="submit" className="btn btn-success mt-4">
         Update Fleet
