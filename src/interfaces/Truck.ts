@@ -1,5 +1,7 @@
 // src/interfaces/Truck.ts
 
+import { TruckStatus } from "../../public/enums/TruckStatus";
+
 export interface Truck {
   truck_model: string;
   registration_number: string;
@@ -9,5 +11,7 @@ export interface Truck {
   dimensions: string;
   fuel_type: string;
   mileage: string;
-  status: string;
+  status: TruckStatus;
+  driver_id?: string;
+  fleet_id:string;
 }
