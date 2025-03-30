@@ -3,6 +3,7 @@
 import { TruckStatus } from "../../public/enums/TruckStatus";
 
 export interface Truck {
+  id: string;
   truck_model: string;
   registration_number: string;
   manufacturer: string;

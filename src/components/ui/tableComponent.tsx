@@ -46,7 +46,7 @@ const FleetRow: React.FC<FleetRowProps> = ({ fleet }) => {
         {isHovered && (
           <Tooltip title="View Details">
             <IconButton
-              onClick={() => navigate(`/fleets/${fleet.id}`)}
+              onClick={() => navigate(`/dashboard/${fleet.id}`)}
               size="small"
             >
               <ArrowForward />
