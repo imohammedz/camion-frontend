@@ -18,7 +18,11 @@ const LoginPage: React.FC = () => {
           password,
         }
       );
-      localStorage.setItem("token", response.data.token); // Save JWT token in local storage
+
+      // Save JWT token and role in local storage
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("role", response.data.role);
+
       // Redirect to a protected route or dashboard
       window.location.href = "/";
     } catch (err: any) {
@@ -67,10 +71,7 @@ const LoginPage: React.FC = () => {
           <Link to="/signup" className={styles.headerLink}>
             {" "}
             {/* Apply headerLink class from CSS module */}
-            <button
-              type="button"
-              className={styles.signupButton}
-            >
+            <button type="button" className={styles.signupButton}>
               Signup
             </button>
           </Link>

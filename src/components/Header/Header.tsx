@@ -9,7 +9,6 @@ import {
   IconButton,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import ThemeToggleButton from "../ui/themeToggleButton.tsx";
 import { fetchUserProfile } from "../../utils/Api.tsx";
 import { DarkMode, LightMode } from "@mui/icons-material";
 
@@ -22,13 +21,18 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, darkMode }) => {
   const theme = useTheme();
   const location = useLocation();
   const excludedPaths = ["/login", "/signup"];
+
   const [userName, setUserName] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  const formattedRole = userRole ? userRole.replace(/_/g, " ") : "";
 
   useEffect(() => {
     const getUserProfile = async () => {
       const profile = await fetchUserProfile();
       if (profile) {
         setUserName(profile.name);
+        setUserRole(profile.role); // ✅ Fetch role from API response
       }
     };
     getUserProfile();
@@ -70,8 +74,20 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, darkMode }) => {
         >
           {userName ? (
             <>
+              <Button
+                variant="outlined"
+                sx={{
+                  color: theme.palette.text.primary,
+                  marginRight: 2,
+                  whiteSpace: "nowrap", // ✅ Prevent text from wrapping
+                  padding: "5px 12px", // ✅ Adjust padding for compact fit
+                  minWidth: "auto", // ✅ Ensure button doesn't stretch unnecessarily
+                }}
+              >
+                {formattedRole}
+              </Button>
               <Typography variant="body1" sx={{ marginRight: 2 }}>
-                Welcome, {userName}!
+                Welcome, {userName}
               </Typography>
               <Button
                 variant="outlined"
