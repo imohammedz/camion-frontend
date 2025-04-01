@@ -21,7 +21,11 @@ const SignupPage: React.FC = () => {
           password,
         }
       );
+
+      // Save JWT token and role in local storage
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("role", response.data.role);
+
       window.location.href = "/login";
     } catch (err: any) {
       setError(err.response.data.msg || "Signup failed");
