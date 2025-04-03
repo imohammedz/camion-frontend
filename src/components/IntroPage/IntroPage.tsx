@@ -1,37 +1,63 @@
-// IntroPage.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./IntroPage.module.css";
-// import backgroundImage from "../../assets/camion_intro_page_bg.jpg";
-import fleetIcon from "../../../public/assets/fleet.jpg";
-import truckLocationIcon from "../../../public/assets/truck.jpg";
-import serviceIcon from "../../../public/assets/service.jpg";
-import advertiseIcon from "../../../public/assets/advertise.jpg";
-import settingsIcon from "../../../public/assets/settings.jpg";
-import shippingIcon from "../../../public/assets/shipping.jpg";
-
-interface OptionCardProps {
-  title: string;
-  description: string;
-  icon: string;
-  onClick: () => void;
-}
-
-const OptionCard: React.FC<OptionCardProps> = ({
-  title,
-  description,
-  icon,
-  onClick,
-}) => (
-  <div className={styles["option-card"]} onClick={onClick}>
-    <img src={icon} alt={title} className={styles["card-icon"]} />
-    <h3>{title}</h3>
-    <p>{description}</p>
-  </div>
-);
+import fleetIcon from "/assets/fleet.jpg";
+import shippingIcon from "/assets/shipping.jpg";
+import AccessModal from "../ui/AccessModal"; // Import the modal component
 
 const IntroPage: React.FC = () => {
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalDescription, setModalDescription] = useState("");
+  const [darkMode, setDarkMode] = useState(false); // Track dark mode state
+
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    setDarkMode(theme === "dark");
+  }, []);
+
+  const userRole = localStorage.getItem("role")?.toUpperCase().trim(); // Normalize role
+
+  // Function to remove underscores and format role names
+  const formatRole = (role: string | null) =>
+    role ? role.replace(/_/g, " ") : "";
+
+  // Function to handle navigation based on role
+  const handleNavigation = (
+    title: string,
+    path: string,
+    requiredRoles: string[]
+  ) => {
+    console.log("User Role:", userRole);
+    console.log("Required Roles:", requiredRoles);
+
+    if (!userRole) {
+      setModalTitle("Access Restricted");
+      setModalDescription(
+        `You need to log in or sign up with a valid ${requiredRoles
+          .map(formatRole)
+          .join(" or ")} role to access ${title}.`
+      );
+      setModalOpen(true);
+      return;
+    }
+
+    if (!requiredRoles.includes(userRole)) {
+      setModalTitle("Access Restricted");
+      setModalDescription(
+        `You are logged in as ${formatRole(
+          userRole
+        )}, but you need a ${requiredRoles
+          .map(formatRole)
+          .join(" or ")} role to access ${title}.`
+      );
+      setModalOpen(true);
+      return;
+    }
+
+    navigate(path);
+  };
 
   const options = [
     {
@@ -39,66 +65,52 @@ const IntroPage: React.FC = () => {
       title: "Shipment Management",
       description: "Manage all shipments efficiently.",
       path: "/create-order",
+      roles: ["SHIPMENT_OWNER"],
     },
     {
       icon: fleetIcon,
       title: "Fleet Management",
       description: "Track and manage your fleet.",
       path: "/fleet-management",
-    },
-    {
-      icon: serviceIcon,
-      title: "Service Management",
-      description: "Handle service requests and records.",
-      path: "/service-management",
-    },
-    {
-      icon: advertiseIcon,
-      title: "Advertisement Management",
-      description: "Advertisements.",
-      path: "/create-advertisement",
-    },
-    {
-      icon: truckLocationIcon,
-      title: "Truck Location Tracking",
-      description: "Track your truck from anywhere",
-      path: "/truck-tracking",
-    },
-    {
-      icon: settingsIcon,
-      title: "Settings",
-      description: "Change settings",
-      path: "/settings",
+      roles: ["FLEET_OWNER"],
     },
   ];
 
   return (
     <div
       className={styles["intro-container"]}
-      style={{ 
-        backgroundColor: "transparent",
-        background:"linear-gradient(135deg, #6a11cb, #2575fc)"
-      }}
-      
+      style={{ color: darkMode ? "white" : "black" }}
     >
       <h1 className={styles["welcome-title"]}>Welcome to Camion</h1>
       <p className={styles["intro-text"]}>Select an option to get started</p>
 
       <div className={styles["options-container"]}>
         {options.map((option, index) => (
-          <OptionCard
+          <div
             key={index}
-            icon={option.icon}
-            title={option.title}
-            description={option.description}
+            className={styles["option-card"]}
             onClick={() =>
-              option.title === "Service Management"
-                ? alert("Navigate to Service Management")
-                : navigate(option.path)
+              handleNavigation(option.title, option.path, option.roles)
             }
-          />
+          >
+            <img
+              src={option.icon}
+              alt={option.title}
+              className={styles["card-icon"]}
+            />
+            <h3>{option.title}</h3>
+            <p>{option.description}</p>
+          </div>
         ))}
       </div>
+
+      <AccessModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={modalTitle}
+        description={modalDescription}
+        darkMode={darkMode}
+      />
     </div>
   );
 };

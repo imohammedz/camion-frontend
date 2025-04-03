@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import FleetRow from "../ui/tableComponent";
 import styles from "./FleetManagement.module.css";
 import axios from "axios";
-import  { FleetDetailDashBoard } from "../FleetDetail/FleetDetailsPage";
 import { Fleet } from "../../interfaces/Fleet";
 
 const FleetManagementPage: React.FC = () => {

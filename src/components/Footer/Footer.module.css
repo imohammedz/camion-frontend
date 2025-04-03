@@ -1,0 +1,73 @@
+.footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #eaeaea;
+    padding: 3rem 2rem;
+  }
+  
+  .footerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .footerContent {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  
+  .footerBrand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .brandName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: red;
+  }
+  
+  .brandAccent {
+    color: inherit;
+  }
+  
+  .copyright {
+    color: #666;
+    font-size: 0.875rem;
+  }
+  
+  .footerLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+  
+  .linkColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .linkHeader {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footerLink {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+  }
+  
+  .footerLink:hover {
+    color: #5e5df0;
+  }
+  
+  
