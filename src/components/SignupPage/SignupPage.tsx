@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./SignupPage.module.css";
 
+const roles = ["FLEET_OWNER", "SHIPMENT_OWNER", "PROSPECT_DRIVER"];
+
+const formattedRoles = roles.map((role) => ({
+  value: role,
+  label: role.replace(/_/g, " "),
+}));
+
 const SignupPage: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -19,6 +27,7 @@ const SignupPage: React.FC = () => {
           email,
           phoneNumber,
           password,
+          role,
         }
       );
 
@@ -96,6 +105,23 @@ const SignupPage: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
               className={styles.input}
             />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="role" className={styles.label}>
+              Role
+            </label>
+            <select
+              id="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className={styles.input}
+            >
+              {formattedRoles.map(({ value, label }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
           </div>
           <button type="submit" className={styles.submitButton}>
             Sign up
