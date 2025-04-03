@@ -23,6 +23,7 @@ import UpdateFleetDialog from "./UpdateFleetDialog";
 import TruckDetailPage from "../TruckDetailPage";
 import FleetTrucksTable from "./TruckDetailsPage";
 import { TruckStatus } from "../../../public/enums/TruckStatus";
+import { DriverDashBoardPage } from "../Drivers/DriverDashboardPage";
 
 const FleetDetailDashBoard: React.FC = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -303,14 +304,10 @@ const FleetDetailDashBoard: React.FC = () => {
         )}
 
         {tabIndex === 1 && (
-          <>
             <FleetTrucksTable fleetId={fleetId} />
-          </>
         )}
         {tabIndex === 2 && (
-          <Typography variant="h6" mt={3}>
-            Drivers Information
-          </Typography>
+         <DriverDashBoardPage fleetId={fleetId} />
         )}
         {tabIndex === 3 && (
           <Typography variant="h6" mt={3}>
